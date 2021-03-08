@@ -1,0 +1,22 @@
+public class Solution {
+    public int removeDuplicates(ArrayList<Integer> a) {
+        int current = 0;
+        int next = 1;
+        while (next < a.size()) {
+            if (!a.get(current).equals(a.get(next))) {
+                putNext(a, current, next);
+                current++;
+                next++;
+            } else {
+                next++;
+            }
+        }
+        return current + 1;
+    }
+
+    private void putNext(ArrayList<Integer> a, int current, int next) {
+        if (next != current + 1) {
+            a.set(current + 1, a.get(next));
+        }
+    }
+}
