@@ -1,0 +1,23 @@
+public class Solution {
+    public int cpFact(int A, int B) {
+        while (true) {
+            int gcd = gcd(A, B);
+            if (gcd != 1) {
+                A = A / gcd;
+            } else {
+                return A;
+            }
+        }
+    }
+
+    private int gcd(int a, int b) {
+        if (a == 0) return b;
+        if (b == 0) return a;
+        if (a > b) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        return gcd(a, b % a);
+    }
+}
