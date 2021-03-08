@@ -1,0 +1,17 @@
+public class Solution {
+    public void merge(ArrayList<Integer> a, ArrayList<Integer> b) {
+        int aPointer = 0;
+        int bPointer = 0;
+        while (aPointer < a.size() && bPointer < b.size()) {
+            if (a.get(aPointer) < b.get(bPointer)) {
+                aPointer++;
+            } else {
+                a.add(aPointer, b.get(bPointer));
+                bPointer++;
+            }
+        }
+        while (bPointer < b.size()) {
+            a.add(b.get(bPointer++));
+        }
+    }
+}
