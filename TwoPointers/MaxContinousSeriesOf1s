@@ -1,0 +1,27 @@
+public class Solution {
+    public ArrayList<Integer> maxone(ArrayList<Integer> A, int B) {
+        int startIndex = 0;
+        int maxLength = Integer.MIN_VALUE;
+        for (int i = 0; i < A.size(); i++) {
+            int numZeros = 0;
+            for (int j = i; j < A.size(); j++) {
+                if (A.get(j) == 0) {
+                    numZeros++;
+                    if (numZeros > B) {
+                        break;
+                    }
+                }
+                if (j - i > maxLength) {
+                    maxLength = j - i;
+                    startIndex = i;
+                }
+            }
+        }
+        ArrayList<Integer> answer = new ArrayList<>();
+        while (maxLength >= 0) {
+            answer.add(startIndex++);
+            maxLength--;
+        }
+        return answer;
+    }
+}
