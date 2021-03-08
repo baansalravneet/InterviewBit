@@ -1,0 +1,23 @@
+public class Solution {
+    public int solve(int A, int B, int C, int D) {
+        if (A == B) {
+            return C == D ? 1 : 0;
+        }
+        if (A == C) {
+            return B == D ? 1 : 0;
+        }
+        if (A == D) {
+            return B == C ? 1 : 0;
+        }
+        if (B == C) {
+            return A == D ? 1 : 0;
+        }
+        if (B == D) {
+            return C == A ? 1 : 0;
+        }
+        if (D == C) {
+            return A == B ? 1 : 0;
+        }
+        return 0;
+    }
+}
