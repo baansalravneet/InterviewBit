@@ -1,0 +1,19 @@
+public class Solution {
+    public String convertToTitle(int A) {
+        StringBuilder sb = new StringBuilder();
+
+        while (A > 0) {
+            int value = (A - 1) % 26;
+            char valueChar = valueToChar(value);
+            sb.append(valueChar);
+            A = (A - 1) / 26;
+        }
+
+        return sb.reverse().toString();
+
+    }
+
+    private char valueToChar(int i) {
+        return (char) (i + (int) 'A');
+    }
+}
