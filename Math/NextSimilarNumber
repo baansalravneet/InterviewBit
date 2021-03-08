@@ -1,0 +1,36 @@
+public class Solution {
+    public String solve(String A) {
+        int position = -1;
+        for (int i = A.length() - 1; i >= 1; i--) {
+            int number1 = A.charAt(i) - '0';
+            int number2 = A.charAt(i - 1) - '0';
+            if (number1 > number2) {
+                position = i - 1;
+                break;
+            }
+        }
+        if (position == -1) {
+            return "-1";
+        }
+
+        int swapPosition = position + 1;
+        for (int i = position + 2; i < A.length(); i++) {
+            int number1 = A.charAt(swapPosition) - '0';
+            int number2 = A.charAt(i) - '0';
+            int number3 = A.charAt(position) - '0';
+            if (number2 < number1 && number2 > number3) {
+                swapPosition = i;
+            }
+        }
+
+        char[] chars = A.toCharArray();
+
+        char temp = chars[position];
+        chars[position] = chars[swapPosition];
+        chars[swapPosition] = temp;
+
+        Arrays.sort(chars, position + 1, chars.length);
+
+        return String.valueOf(chars);
+    }
+}
