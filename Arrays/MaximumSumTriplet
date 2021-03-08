@@ -1,0 +1,40 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        int[] leftValues = new int[A.size()];
+        int[] rightValues = new int[A.size()];
+        populateLeftValues(A, leftValues);
+        populateRightValues(A, rightValues);
+        int ans = findAnswer(A, leftValues, rightValues);
+        return ans == Integer.MIN_VALUE ? 0 : ans;
+    }
+
+    private int findAnswer(List<Integer> A, int[] leftValues, int[] rightValues) {
+        int value = Integer.MIN_VALUE;
+        for (int i = 0; i < A.size(); i++) {
+            if (leftValues[i] < A.get(i) && A.get(i) < rightValues[i]) {
+                value = Math.max(value, leftValues[i] + A.get(i) + rightValues[i]);
+            }
+        }
+        return value;
+    }
+
+    private void populateLeftValues(List<Integer> A, int[] leftValues) {
+        leftValues[0] = Integer.MAX_VALUE;
+        TreeSet<Integer> sortedPrefix = new TreeSet<>();
+        sortedPrefix.add(A.get(0));
+        for (int i = 1; i < A.size(); i++) {
+            Integer value = sortedPrefix.lower(A.get(i));
+            leftValues[i] = null == value ? Integer.MAX_VALUE : value;
+            sortedPrefix.add(A.get(i));
+        }
+    }
+
+    private void populateRightValues(List<Integer> A, int[] rightValues) {
+        int value = Integer.MIN_VALUE;
+        rightValues[A.size() - 1] = value;
+        for (int i = A.size() - 2; i >= 0; i--) {
+            rightValues[i] = Math.max(value, A.get(i + 1));
+            value = rightValues[i];
+        }
+    }
+}
