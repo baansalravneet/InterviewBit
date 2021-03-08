@@ -1,0 +1,21 @@
+public class Solution {
+    public int reverse(int A) {
+        boolean negative = false;
+        if (A < 0) {
+            negative = true;
+            A = -A;
+        }
+        StringBuilder sb = new StringBuilder(Integer.toString(A));
+        sb.reverse();
+        int ans = 0;
+        try {
+            ans = Integer.parseInt(sb.toString());
+        } catch (Exception e) {
+            return 0;
+        }
+        if (negative) {
+            ans = -ans;
+        }
+        return ans;
+    }
+}
