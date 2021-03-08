@@ -1,0 +1,35 @@
+public class Solution {
+    private static final int MOD = 1000003;
+
+    public int findRank(String A) {
+        long rank = 0;
+        List<Character> characters = new ArrayList<>();
+        for (int i = 0; i < A.length(); i++) {
+            characters.add(A.charAt(i));
+        }
+        Collections.sort(characters);
+        for (int i = 0; i < A.length(); i++) {
+            int position = findPosition(characters, A.charAt(i));
+            rank = rank + (long) position * factorial(A.length() - 1 - i);
+            characters.remove(position);
+        }
+        return (int) ((rank + 1) % MOD);
+    }
+
+    private long factorial(int a) {
+        int answer = 1;
+        for (int i = 1; i <= a; i++) {
+            answer = (answer * i) % MOD;
+        }
+        return answer;
+    }
+
+    private int findPosition(List<Character> characters, char a) {
+        for (int i = 0; i < characters.size(); i++) {
+            if (characters.get(i) == a) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
