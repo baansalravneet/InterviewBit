@@ -1,0 +1,29 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        int high = A.stream().max(Integer::compare).get();
+        int low = 0;
+        int mid = 0;
+        int ans = 0;
+        while (low <= high) {
+            mid = (low+high)/2;
+            long wood = getWood(mid, A);
+            if (wood >= B) {
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    private long getWood(int height, List<Integer> A) {
+        long wood = 0;
+        for (int i = 0; i < A.size(); i++) {
+            if (A.get(i) > height) {
+                wood = wood + A.get(i) - height;
+            }
+        }
+        return wood;
+    }
+}
