@@ -1,0 +1,23 @@
+public class Solution {
+    public ArrayList<Integer> plusOne(ArrayList<Integer> A) {
+        ArrayList<Integer> result = new ArrayList<>();
+        int carry = 1;
+        for (int i = A.size() - 1; i >= 0; i--) {
+            int number = A.get(i) + carry;
+            if (number >= 10) {
+                number = number % 10;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            result.add(0, number);
+        }
+        if (carry == 1) {
+            result.add(0, 1);
+        }
+        while (!result.isEmpty() && result.get(0) == 0) {
+            result.remove(0);
+        }
+        return result;
+    }
+}
