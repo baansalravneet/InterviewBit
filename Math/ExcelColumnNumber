@@ -1,0 +1,14 @@
+public class Solution {
+    public int titleToNumber(String A) {
+        int ans = 0;
+        for (int i = A.length()-1; i >= 0; i--) {
+            int value = charToValue(A.charAt(i));
+            ans = ans + value * (int)Math.pow(26,A.length()-1-i);
+        }
+        return ans;
+    }
+
+    private int charToValue(char a) {
+        return (int)a - (int)'A' + 1;
+    }
+}
