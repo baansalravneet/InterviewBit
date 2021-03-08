@@ -1,0 +1,13 @@
+public class Solution {
+    public int isPower(int A) {
+        if (A == 1) return 1;
+        for (int i = 2; i <= 32; i++) {
+            int a = 2;
+            while (Math.pow(a,i) <= (double)Integer.MAX_VALUE) {
+                if (Math.pow(a,i) == A) return 1;
+                a++;
+            }
+        }
+        return 0;
+    }
+}
