@@ -6,10 +6,8 @@ public class Solution {
             if (!a.get(current).equals(a.get(next))) {
                 putNext(a, current, next);
                 current++;
-                next++;
-            } else {
-                next++;
             }
+            next++;
         }
         return current + 1;
     }
