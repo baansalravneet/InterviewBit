@@ -1,0 +1,33 @@
+public class Solution {
+    public int isPalindrome(String A) {
+        int i = 0;
+        int j = A.length()-1;
+        while (i <= j) {
+            if (!checkAlphaNumeric(A.charAt(i))) {
+                i++;
+                continue;
+            }
+            if (!checkAlphaNumeric(A.charAt(j))) {
+                j--;
+                continue;
+            }
+            if (makeLower(A.charAt(i)) != makeLower(A.charAt(j))) {
+                return 0;
+            }
+            i++;
+            j--;
+        }
+        return 1;
+    }
+
+    private boolean checkAlphaNumeric(char a) {
+        return (a >= 'A' && a <= 'Z') || (a >= 'a' && a <= 'z') || (a >= '0' && a <= '9');
+    }
+
+    private char makeLower(char a) {
+        if (a >= 'A' && a <= 'Z') {
+            return (char) ((int) a - (int) 'A' + (int) 'a');
+        }
+        return a;
+    }
+}
