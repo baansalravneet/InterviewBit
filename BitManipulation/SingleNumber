@@ -1,0 +1,10 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int singleNumber(final List<Integer> A) {
+        int answer = 0;
+        for (int a : A) {
+            answer = answer ^ a;
+        }
+        return answer;
+    }
+}
