@@ -1,0 +1,11 @@
+public class Solution {
+    public int solve(int A) {
+        int xor = A ^ (A - 1);
+        int answer = 0;
+        while (xor != 0) {
+            answer++;
+            xor = xor >> 1;
+        }
+        return answer - 1;
+    }
+}
