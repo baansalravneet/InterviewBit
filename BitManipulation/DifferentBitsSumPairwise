@@ -1,0 +1,22 @@
+public class Solution {
+    private static final long MOD = 1000000007;
+
+    public int cntBits(ArrayList<Integer> A) {
+        long answer = 0;
+        for (int i = 0; i < 31; i++) {
+            long ones = 0;
+            long zeros = 0;
+            for (int a : A) {
+                if ((a & (1 << i)) != 0) {
+                    ones++;
+                    ones = ones % MOD;
+                } else {
+                    zeros++;
+                    zeros = zeros % MOD;
+                }
+            }
+            answer = (answer + (ones * zeros)) % MOD;
+        }
+        return (int) ((answer * 2) % MOD);
+    }
+}
