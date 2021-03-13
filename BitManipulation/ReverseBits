@@ -1,0 +1,10 @@
+public class Solution {
+    public long reverse(long a) {
+        long answer = 0;
+        for (int i = 0; i < 32; i++) {
+            long bitAtI = (a & (1 << i)) >> i;
+            answer = answer | (bitAtI << (31 - i));
+        }
+        return answer;
+    }
+}
