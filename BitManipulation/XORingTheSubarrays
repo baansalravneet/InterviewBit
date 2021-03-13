@@ -1,0 +1,12 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        int answer = 0;
+        for (int i = 0; i < A.size(); i++) {
+            long contribution = (A.size() - i) * (i + 1);
+            if (contribution % 2 != 0) {
+                answer = answer ^ A.get(i);
+            }
+        }
+        return answer;
+    }
+}
