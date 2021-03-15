@@ -1,0 +1,25 @@
+public class Solution {
+    private static final Map<Character, Integer> conversions = new HashMap<Character, Integer>() {{
+        put('I', 1);
+        put('V', 5);
+        put('X', 10);
+        put('L', 50);
+        put('C', 100);
+        put('D', 500);
+        put('M', 1000);
+    }};
+
+    public int romanToInt(String A) {
+        int answer = 0;
+        int lastNumber = Integer.MAX_VALUE;
+        for (int i = 0; i < A.length(); i++) {
+            int number = conversions.get(A.charAt(i));
+            if (number > lastNumber) {
+                answer = answer - lastNumber - lastNumber;
+            }
+            lastNumber = number;
+            answer = answer + number;
+        }
+        return answer;
+    }
+}
