@@ -1,0 +1,89 @@
+public class Solution {
+    private static final Map<Integer, String> conversions = new HashMap<Integer, String>() {{
+        put(1, "I");
+        put(4, "IV");
+        put(5, "V");
+        put(9, "IX");
+        put(10, "X");
+        put(40, "XL");
+        put(50, "L");
+        put(90, "XC");
+        put(100, "C");
+        put(400, "CD");
+        put(500, "D");
+        put(900, "CM");
+        put(1000, "M");
+    }};
+
+    public String intToRoman(int A) {
+        StringBuilder sb = new StringBuilder();
+        while (A != 0) {
+            if (A >= 1000) {
+                sb.append(conversions.get(1000));
+                A -= 1000;
+                continue;
+            }
+            if (A >= 900) {
+                sb.append(conversions.get(900));
+                A -= 900;
+                continue;
+            }
+            if (A >= 500) {
+                sb.append(conversions.get(500));
+                A -= 500;
+                continue;
+            }
+            if (A >= 400) {
+                sb.append(conversions.get(400));
+                A -= 400;
+                continue;
+            }
+            if (A >= 100) {
+                sb.append(conversions.get(100));
+                A -= 100;
+                continue;
+            }
+            if (A >= 90) {
+                sb.append(conversions.get(90));
+                A -= 90;
+                continue;
+            }
+            if (A >= 50) {
+                sb.append(conversions.get(50));
+                A -= 50;
+                continue;
+            }
+            if (A >= 40) {
+                sb.append(conversions.get(40));
+                A -= 40;
+                continue;
+            }
+            if (A >= 10) {
+                sb.append(conversions.get(10));
+                A -= 10;
+                continue;
+            }
+            if (A >= 9) {
+                sb.append(conversions.get(9));
+                A -= 9;
+                continue;
+            }
+            if (A >= 5) {
+                sb.append(conversions.get(5));
+                A -= 5;
+                continue;
+            }
+            if (A >= 4) {
+                sb.append(conversions.get(4));
+                A -= 4;
+                continue;
+            }
+            if (A >= 1) {
+                sb.append(conversions.get(1));
+                A -= 1;
+                continue;
+            }
+        }
+        return sb.toString();
+    }
+}
