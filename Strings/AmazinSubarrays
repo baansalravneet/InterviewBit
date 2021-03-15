@@ -1,0 +1,15 @@
+public class Solution {
+    private final static int MOD = 10003;
+    private final static Set<Character> specialCharacters = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
+
+    public int solve(String A) {
+        int answer = 0;
+        for (int i = 0; i < A.length(); i++) {
+            if (specialCharacters.contains(A.charAt(i))) {
+                answer = answer + (A.length() - i) % MOD;
+                answer = answer % MOD;
+            }
+        }
+        return answer;
+    }
+}
