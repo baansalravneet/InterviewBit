@@ -1,0 +1,148 @@
+public class Solution {
+    public int solve(ArrayList<String> A) {
+        ArrayList<Double> bucketA = new ArrayList<>();
+        ArrayList<Double> bucketB = new ArrayList<>();
+        ArrayList<Double> bucketC = new ArrayList<>();
+
+        for (int i = 0; i < A.size(); i++) {
+            double number = Double.valueOf(A.get(i));
+            if (number < (double)2/3) {
+                bucketA.add(number);
+            } else if (number >= (double)2/3 && number <= (double)1) {
+                bucketB.add(number);
+            } else {
+                bucketC.add(number);
+            }
+        }
+
+        if (checkCase1(bucketA)) {
+            return 1;
+        }
+        if (checkCase2(bucketA, bucketB)) {
+            return 1;
+        }
+        if (checkCase3(bucketA, bucketC)) {
+            return 1;
+        }
+        if (checkCase4(bucketA, bucketB)) {
+            return 1;
+        }
+        if (checkCase5(bucketA, bucketB, bucketC)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private boolean checkCase1(ArrayList<Double> bucketA) {
+        if (bucketA.size() < 3) {
+            return false;
+        }
+        if (sumTopThree(bucketA) > 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCase2(ArrayList<Double> bucketA, ArrayList<Double> bucketB) {
+        if (bucketA.size() < 2 || bucketB.size() < 1) {
+            return false;
+        }
+        double sumTopTwo = sumTopTwo(bucketA);
+        for (int i = 0; i < bucketB.size(); i++) {
+            if (1 - sumTopTwo < bucketB.get(i) && bucketB.get(i) < 2 - sumTopTwo) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkCase3(ArrayList<Double> bucketA, ArrayList<Double> bucketC) {
+        if (bucketA.size() < 2 || bucketC.size() < 1) {
+            return false;
+        }
+        if (sumBottomTwo(bucketA) + bottom(bucketC) < 2) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCase4(ArrayList<Double> bucketA, ArrayList<Double> bucketB) {
+        if (bucketA.size() < 1 || bucketB.size() < 2) {
+            return false;
+        }
+        if (sumBottomTwo(bucketB) + bottom(bucketA) < 2) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCase5(ArrayList<Double> bucketA,
+                               ArrayList<Double> bucketB,
+                               ArrayList<Double> bucketC) {
+        if (bucketA.size() < 1 || bucketB.size() < 1 || bucketC.size() < 1) {
+            return false;
+        }
+        if (bottom(bucketA) + bottom(bucketB) + bottom(bucketC) < 2) {
+            return true;
+        }
+        return false;
+    }
+
+    private double sumBottomTwo(ArrayList<Double> list) {
+        double a = Integer.MAX_VALUE;
+        double b = Integer.MAX_VALUE;
+        for (int i = 0; i < list.size(); i++) {
+            double n = list.get(i);
+            if (n < a) {
+                b = a;
+                a = n;
+            } else if (n < b) {
+                b = n;
+            }
+        }
+        return a + b;
+    }
+
+    private double sumTopThree(ArrayList<Double> list) {
+        double a = 0;
+        double b = 0;
+        double c = 0;
+        for (int i = 0; i < list.size(); i++) {
+            double n = list.get(i);
+            if (n > a) {
+                c = b;
+                b = a;
+                a = n;
+            } else if (n > b) {
+                c = b;
+                b = n;
+            } else if (n > c) {
+                c = n;
+            }
+        }
+        return a + b + c;
+    }
+
+    private double sumTopTwo(ArrayList<Double> list) {
+        double a = 0;
+        double b = 0;
+        for (int i = 0; i < list.size(); i++) {
+            double n = list.get(i);
+            if (n > a) {
+                b = a;
+                a = n;
+            } else if (n > b) {
+                b = n;
+            }
+        }
+        return a + b;
+    }
+
+    private double bottom(ArrayList<Double> list) {
+        double a = Double.MAX_VALUE;
+        for (int i = 0; i < list.size(); i++) {
+            a = Math.min(a, list.get(i));
+        }
+        return a;
+    }
+}
