@@ -1,0 +1,18 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> solve(int A) {
+        ArrayList<ArrayList<Integer>> answer = new ArrayList<>();
+        for (int i = 0; i < A; i++) {
+            answer.add(new ArrayList<>());
+            answer.get(i).add(1);
+        }
+        for (int i = 1; i < A; i++) {
+            int j = 1;
+            while (j < answer.get(i - 1).size()) {
+                answer.get(i).add(answer.get(i - 1).get(j) + answer.get(i - 1).get(j - 1));
+                j++;
+            }
+            answer.get(i).add(1);
+        }
+        return answer;
+    }
+}
