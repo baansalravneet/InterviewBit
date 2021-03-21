@@ -1,0 +1,19 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        int n = A.size();
+        int[] rightMax = new int[n];
+        ArrayList<Integer> answer = new ArrayList<>();
+
+        rightMax[n - 1] = A.get(n - 1);
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(A.get(i), rightMax[i + 1]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (rightMax[i] == A.get(i)) {
+                answer.add(A.get(i));
+            }
+        }
+        return answer;
+    }
+}
