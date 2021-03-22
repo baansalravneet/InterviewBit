@@ -1,0 +1,48 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        int left = 0;
+        int right = A.size() - 1;
+        int highest = -1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (A.get(mid) > A.get(mid + 1) && A.get(mid) > A.get(mid - 1)) {
+                highest = mid;
+                break;
+            } else if (A.get(mid) > A.get(mid - 1)) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        left = 0;
+        right = highest;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (A.get(mid) == B) {
+                return mid;
+            }
+            if (A.get(mid) > B) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        left = highest;
+        right = A.size() - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (A.get(mid) == B) {
+                return mid;
+            }
+            if (A.get(mid) > B) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+}
