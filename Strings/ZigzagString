@@ -1,0 +1,37 @@
+public class Solution {
+    public String convert(String A, int B) {
+        if (B == 1) {
+            return A;
+        }
+        StringBuilder answer = new StringBuilder();
+        StringBuilder[] builders = new StringBuilder[B];
+        int row = 0;
+        boolean down = true;
+        for (int i = 0; i < A.length(); i++) {
+            if (builders[row] == null) {
+                builders[row] = new StringBuilder();
+            }
+            builders[row].append(A.charAt(i));
+            if (down) {
+                row++;
+                if (row == B) {
+                    row = B - 2;
+                    down = false;
+                }
+            } else {
+                row--;
+                if (row == -1) {
+                    row = 1;
+                    down = true;
+                }
+            }
+        }
+        for (StringBuilder sb : builders) {
+            if (sb == null) {
+                break;
+            }
+            answer.append(sb.toString());
+        }
+        return answer.toString();
+    }
+}
