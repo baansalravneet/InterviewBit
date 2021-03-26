@@ -1,0 +1,18 @@
+public class Solution {
+    public int solve(String A) {
+        int opens = 0;
+        int closes = 0;
+        for (int i = 0; i < A.length(); i++) {
+            if (A.charAt(i) == '(') {
+                opens++;
+            } else {
+                if (opens >= 1) {
+                    opens--;
+                } else {
+                    closes++;
+                }
+            }
+        }
+        return opens + closes;
+    }
+}
