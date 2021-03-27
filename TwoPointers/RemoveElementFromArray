@@ -1,0 +1,14 @@
+public class Solution {
+    public int removeElement(ArrayList<Integer> a, int b) {
+        int updatePointer = 0;
+        int currentPointer = 0;
+        while (currentPointer < a.size()) {
+            if (a.get(currentPointer) != b) {
+                a.set(updatePointer, a.get(currentPointer));
+                updatePointer++;
+            }
+            currentPointer++;
+        }
+        return updatePointer;
+    }
+}
