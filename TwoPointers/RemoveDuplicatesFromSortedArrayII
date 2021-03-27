@@ -1,0 +1,21 @@
+public class Solution {
+    public int removeDuplicates(ArrayList<Integer> A) {
+        int updatePointer = 0;
+        for (int i = 0; i < A.size(); i++) {
+            int j = i;
+            A.set(updatePointer, A.get(j));
+            updatePointer++;
+            j++;
+            if (j < A.size() && A.get(j).equals(A.get(i))) {
+                A.set(updatePointer, A.get(j));
+                updatePointer++;
+                j++;
+            }
+            while (j < A.size() && A.get(j).equals(A.get(i))) {
+                j++;
+            }
+            i = j - 1;
+        }
+        return updatePointer;
+    }
+}
