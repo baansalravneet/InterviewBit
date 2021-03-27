@@ -1,0 +1,39 @@
+public class Solution {
+    public int findMedian(ArrayList<ArrayList<Integer>> A) {
+        int answer = 0;
+        int totalNumbers = A.size() * A.get(0).size();
+        int left = 1;
+        int right = 1000000000;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            int smaller = getNumberOfSmaller(A, mid);
+            if (smaller > totalNumbers / 2) {
+                right = mid - 1;
+            } else {
+                answer = mid;
+                left = mid + 1;
+            }
+        }
+        return answer;
+    }
+
+    private int getNumberOfSmaller(ArrayList<ArrayList<Integer>> A, int B) {
+        int answer = 0;
+        for (int i = 0; i < A.size(); i++) {
+            int left = 0;
+            int right = A.get(i).size() - 1;
+            int thisAnswer = 0;
+            while (left <= right) {
+                int mid = (left + right) / 2;
+                if (A.get(i).get(mid) < B) {
+                    thisAnswer = mid + 1;
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            answer = answer + thisAnswer;
+        }
+        return answer;
+    }
+}
