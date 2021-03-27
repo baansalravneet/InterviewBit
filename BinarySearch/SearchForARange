@@ -2,16 +2,15 @@ public class Solution {
     // DO NOT MODIFY THE LIST. IT IS READ ONLY
     public ArrayList<Integer> searchRange(final List<Integer> A, int B) {
         ArrayList<Integer> answer = new ArrayList<>();
-        answer.add(findOccrance(A, B, true));
-        answer.add(findOccrance(A, B, false));
+        answer.add(findOccurrence(A, B, true));
+        answer.add(findOccurrence(A,B, false));
         return answer;
     }
-
-    private int findOccrance(List<Integer> A, int B, boolean first) {
+    private int findOccurrence(List<Integer> A, int B, boolean first) {
         int left = 0;
-        int right = A.size() - 1;
+        int right = A.size()-1;
         int answer = -1;
-        while (left <= right) {
+        while(left <= right) {
             int mid = (left + right) / 2;
             if (A.get(mid) > B) {
                 right = mid - 1;
