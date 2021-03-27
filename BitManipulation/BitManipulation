@@ -1,0 +1,22 @@
+public class Solution {
+    public int divide(int A, int B) {
+        if (A == Integer.MIN_VALUE && B == -1) {
+            return Integer.MAX_VALUE;
+        }
+        int sign = (A < 0 ^ B < 0) ? -1 : 1;
+        long divisor = Math.abs((long) B);
+        long dividend = Math.abs((long) A);
+        long quotient = 0;
+        long valueDivided = 0;
+        for (long i = 31; i >= 0; i--) {
+            if ((valueDivided + (divisor << i)) <= dividend) {
+                valueDivided += (divisor << i);
+                quotient = quotient | (1L << i);
+            }
+        }
+        if (sign == -1) {
+            quotient = -quotient;
+        }
+        return (int) quotient;
+    }
+}
