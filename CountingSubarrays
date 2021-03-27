@@ -1,0 +1,18 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        int answer = 0;
+        int i = 0;
+        int j = 0;
+        long currentSum = 0;
+        while (i < A.size() && j < A.size()) {
+            currentSum += A.get(j);
+            while (i <= j && currentSum >= B) {
+                currentSum = currentSum - A.get(i);
+                i++;
+            }
+            answer = answer + j - i + 1;
+            j++;
+        }
+        return answer;
+    }
+}
