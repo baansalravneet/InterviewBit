@@ -1,0 +1,29 @@
+public class Solution {
+    public void sortColors(ArrayList<Integer> a) {
+        int zeros = 0;
+        int ones = 0;
+        int twos = 0;
+        for (int i : a) {
+            if (i == 0) {
+                zeros++;
+            } else if (i == 1) {
+                ones++;
+            } else {
+                twos++;
+            }
+        }
+        int pointer = 0;
+        while (zeros > 0) {
+            a.set(pointer++, 0);
+            zeros--;
+        }
+        while (ones > 0) {
+            a.set(pointer++, 1);
+            ones--;
+        }
+        while (twos > 0) {
+            a.set(pointer++, 2);
+            twos--;
+        }
+    }
+}
