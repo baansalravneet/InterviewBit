@@ -1,0 +1,24 @@
+public class Solution {
+    public String longestCommonPrefix(ArrayList<String> A) {
+        if (A.size() == 1) {
+            return A.get(0);
+        }
+        String answer = getCommonPrefix(A.get(0), A.get(1));
+        for (int i = 2; i < A.size(); i++) {
+            answer = getCommonPrefix(answer, A.get(i));
+        }
+        return answer;
+    }
+
+    private String getCommonPrefix(String A, String B) {
+        int i = 0;
+        int j = 0;
+        StringBuilder prefix = new StringBuilder();
+        while (i < A.length() && j < B.length() && A.charAt(i) == B.charAt(j)) {
+            prefix.append(A.charAt(i));
+            i++;
+            j++;
+        }
+        return prefix.toString();
+    }
+}
