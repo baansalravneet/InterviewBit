@@ -1,0 +1,25 @@
+public class Solution {
+    public String countAndSay(int A) {
+        String answer = "1";
+        while (A > 1) {
+            StringBuilder next = new StringBuilder();
+            int count = 1;
+            char currentChar = answer.charAt(0);
+            for (int i = 1; i < answer.length(); i++) {
+                if (answer.charAt(i) == currentChar) {
+                    count++;
+                    continue;
+                }
+                next.append(String.valueOf(count));
+                next.append(currentChar);
+                count = 1;
+                currentChar = answer.charAt(i);
+            }
+            next.append(String.valueOf(count));
+            next.append(currentChar);
+            answer = next.toString();
+            A--;
+        }
+        return answer;
+    }
+}
