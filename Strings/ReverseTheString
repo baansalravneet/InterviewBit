@@ -1,0 +1,12 @@
+public class Solution {
+    public String solve(String A) {
+        StringBuilder answer = new StringBuilder();
+        String[] words = A.split(" ");
+        for (int i = words.length - 1; i > 0; i--) {
+            answer.append(words[i]);
+            answer.append(" ");
+        }
+        answer.append(words[0]);
+        return answer.toString();
+    }
+}
