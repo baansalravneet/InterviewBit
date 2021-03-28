@@ -1,0 +1,22 @@
+public class Solution {
+    public String solve(String A, int B) {
+        StringBuilder answer = new StringBuilder();
+        StringBuilder current = new StringBuilder();
+        current.append(A.charAt(0));
+        for (int i = 1; i < A.length(); i++) {
+            if (A.charAt(i) == current.charAt(0)) {
+                current.append(A.charAt(i));
+            } else {
+                if (current.length() != B) {
+                    answer.append(current);
+                }
+                current = new StringBuilder();
+                current.append(A.charAt(i));
+            }
+        }
+        if (current.length() != B) {
+            answer.append(current);
+        }
+        return answer.toString();
+    }
+}
