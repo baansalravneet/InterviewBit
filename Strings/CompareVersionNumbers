@@ -1,0 +1,71 @@
+public class Solution {
+    public int compareVersion(String A, String B) {
+        String[] Anums = A.split("\\.");
+        String[] Bnums = B.split("\\.");
+        int i = 0;
+        int j = 0;
+        while (i < Anums.length && j < Bnums.length) {
+            int comparison = compareIntValues(Anums[i++], Bnums[j++]);
+            if (comparison > 0) {
+                return 1;
+            }
+            if (comparison < 0) {
+                return -1;
+            }
+        }
+        while (j < Bnums.length) {
+            int comparison = compareIntValues("0", Bnums[j++]);
+            if (comparison < 0) {
+                return -1;
+            }
+        }
+        while (i < Anums.length) {
+            int comparison = compareIntValues(Anums[i++], "0");
+            if (comparison > 0) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    private int compareIntValues(String A, String B) {
+        if (A.equals(B)) {
+            return 0;
+        }
+        int i = 0;
+        int j = 0;
+
+        // ignore leading zeros
+        while (i < A.length() && A.charAt(i) == '0') {
+            i++;
+        }
+        while (j < B.length() && B.charAt(j) == '0') {
+            j++;
+        }
+
+        if (i == A.length() && j == B.length()) {
+            return 0;
+        }
+
+        if (i == A.length() || A.length() - i < B.length() - j) {
+            return -1;
+        }
+
+        if (j == B.length() || A.length() - i > B.length() - j) {
+            return 1;
+        }
+
+        while (i < A.length() && j < B.length()) {
+            if (A.charAt(i) > B.charAt(j)) {
+                return 1;
+            }
+            if (A.charAt(i) < B.charAt(j)) {
+                return -1;
+            }
+            i++;
+            j++;
+        }
+        return 0;
+
+    }
+}
