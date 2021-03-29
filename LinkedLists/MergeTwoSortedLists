@@ -1,16 +1,16 @@
 /**
  * Definition for singly-linked list.
  * class ListNode {
- *     public int val;
- *     public ListNode next;
- *     ListNode(int x) { val = x; next = null; }
+ * public int val;
+ * public ListNode next;
+ * ListNode(int x) { val = x; next = null; }
  * }
  */
 public class Solution {
     public ListNode mergeTwoLists(ListNode A, ListNode B) {
         final ListNode answer = new ListNode(0);
         ListNode pointer = answer;
-        while(A != null || B != null) {
+        while (A != null || B != null) {
             if (B == null || (A != null && A.val < B.val)) {
                 pointer.next = A;
                 A = A.next;
