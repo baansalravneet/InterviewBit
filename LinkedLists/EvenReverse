@@ -1,0 +1,61 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ * public int val;
+ * public ListNode next;
+ * ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+    public ListNode solve(ListNode A) {
+        ListNode evens = new ListNode(-1);
+        ListNode odds = new ListNode(-1);
+        ListNode evensHead = evens;
+        ListNode oddsHead = odds;
+        boolean flag = true;
+        while (A != null) {
+            if (flag) {
+                odds.next = A;
+                odds = odds.next;
+                flag = false;
+            } else {
+                evens.next = A;
+                evens = evens.next;
+                flag = true;
+            }
+            A = A.next;
+            odds.next = null;
+            evens.next = null;
+        }
+        evensHead = evensHead.next;
+        oddsHead = oddsHead.next;
+        //return oddsHead;
+        ListNode reversedEvensHead = null;
+        while (evensHead != null) {
+            ListNode temp = evensHead.next;
+            evensHead.next = reversedEvensHead;
+            reversedEvensHead = evensHead;
+            evensHead = temp;
+        }
+        ListNode answer = new ListNode(-1);
+        ListNode pointer = answer;
+        flag = true;
+        while (oddsHead != null) {
+            if (flag) {
+                pointer.next = oddsHead;
+                pointer = pointer.next;
+                oddsHead = oddsHead.next;
+                flag = false;
+            } else {
+                pointer.next = reversedEvensHead;
+                pointer = pointer.next;
+                reversedEvensHead = reversedEvensHead.next;
+                flag = true;
+            }
+        }
+        if (reversedEvensHead != null) {
+            pointer.next = reversedEvensHead;
+        }
+        return answer.next;
+    }
+}
