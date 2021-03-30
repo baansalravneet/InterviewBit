@@ -1,0 +1,40 @@
+public class Solution {
+    public int maxSpecialProduct(ArrayList<Integer> A) {
+        int[] lsv = new int[A.size()];
+        int[] rsv = new int[A.size()];
+
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0; i < A.size(); i++) {
+            while (!stack.isEmpty() && A.get(stack.peekFirst()) <= A.get(i)) {
+                stack.removeFirst();
+            }
+            if (stack.isEmpty()) {
+                lsv[i] = -1;
+            } else {
+                lsv[i] = stack.peekFirst();
+            }
+            stack.addFirst(i);
+        }
+
+        stack = new ArrayDeque<>();
+        for (int i = A.size() - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && A.get(stack.peekFirst()) <= A.get(i)) {
+                stack.removeFirst();
+            }
+            if (stack.isEmpty()) {
+                rsv[i] = -1;
+            } else {
+                rsv[i] = stack.peekFirst();
+            }
+            stack.addFirst(i);
+        }
+
+        long answer = 0;
+        for (int i = 0; i < A.size(); i++) {
+            if (lsv[i] != -1 || rsv[i] != -1) {
+                answer = Math.max(answer, (long) lsv[i] * (long) rsv[i]);
+            }
+        }
+        return (int) (answer % 1000000007L);
+    }
+}
