@@ -1,0 +1,47 @@
+public class Solution {
+
+    public boolean hotel(ArrayList<Integer> arrive, ArrayList<Integer> depart, int K) {
+        List<Timing> times = new ArrayList<>();
+        for (int i = 0; i < arrive.size(); i++) {
+            if (arrive.get(i) != depart.get(i)) {
+                times.add(new Timing(arrive.get(i), true));
+                times.add(new Timing(depart.get(i), false));
+            }
+        }
+        Collections.sort(times);
+        for (int i = 0; i < times.size(); i++) {
+            if (times.get(i).start) {
+                K--;
+            } else {
+                K++;
+            }
+            if (K < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public class Timing implements Comparable {
+        int time;
+        boolean start;
+
+        public Timing(int time, boolean start) {
+            this.time = time;
+            this.start = start;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            Timing b = (Timing) o;
+            if (this.time == b.time) {
+                if (this.start) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+            return this.time - b.time;
+        }
+    }
+}
