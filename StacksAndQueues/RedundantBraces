@@ -1,0 +1,23 @@
+public class Solution {
+    private static final Set<Character> s = new HashSet<>(Arrays.asList('+', '-', '*', '/'));
+
+    public int braces(String A) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0; i < A.length(); i++) {
+            if (s.contains(A.charAt(i))) {
+                if (!stack.isEmpty()) {
+                    stack.addFirst(stack.pollFirst() + 1);
+                }
+                continue;
+            }
+            if (A.charAt(i) == '(') {
+                stack.addFirst(0);
+            } else if (A.charAt(i) == ')') {
+                if (stack.pollFirst() == 0) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+}
