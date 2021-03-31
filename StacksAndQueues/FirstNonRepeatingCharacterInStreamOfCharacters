@@ -1,0 +1,25 @@
+public class Solution {
+    public String solve(String A) {
+        Map<Character, Integer> characterCount = new HashMap<>();
+        Deque<Character> queue = new ArrayDeque<Character>();
+        StringBuilder answer = new StringBuilder();
+        for (int i = 0; i < A.length(); i++) {
+            char c = A.charAt(i);
+            if (characterCount.containsKey(c)) {
+                characterCount.put(c, characterCount.get(c) + 1);
+            } else {
+                characterCount.put(c, 1);
+                queue.add(c);
+            }
+            while (!queue.isEmpty() && characterCount.get(queue.peekFirst()) > 1) {
+                queue.pollFirst();
+            }
+            if (!queue.isEmpty()) {
+                answer.append(queue.peekFirst());
+            } else {
+                answer.append('#');
+            }
+        }
+        return answer.toString();
+    }
+}
