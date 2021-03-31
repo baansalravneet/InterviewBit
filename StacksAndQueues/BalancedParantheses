@@ -1,0 +1,20 @@
+public class Solution {
+    public int solve(String A) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (int i = 0; i < A.length(); i++) {
+            if (A.charAt(i) == '(') {
+                stack.addFirst(A.charAt(i));
+            } else {
+                if (stack.isEmpty()) {
+                    return 0;
+                } else {
+                    stack.pollFirst();
+                }
+            }
+        }
+        if (stack.isEmpty()) {
+            return 1;
+        }
+        return 0;
+    }
+}
