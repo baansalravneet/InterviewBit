@@ -1,0 +1,20 @@
+public class Solution {
+    public int pow(int x, int n, int d) {
+        if (x == 0) {
+            return 0;
+        }
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return Math.floorMod(x, d);
+        }
+        if (n % 2 == 0) {
+            int half = pow(x, n / 2, d);
+            return (int) Math.floorMod(((long) half * (long) half), (long) d);
+        } else {
+            int half = pow(x, n - 1, d);
+            return (int) Math.floorMod(((long) x * (long) half), (long) d);
+        }
+    }
+}
