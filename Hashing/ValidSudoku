@@ -1,0 +1,164 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int isValidSudoku(final List<String> A) {
+        if (checkRows(A) + checkColumns(A) + checkBox(A) == 3) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private int checkRows(List<String> A) {
+        for (int i = 0; i < 9; i++) {
+            Set<Character> set = new HashSet<Character>();
+            for (int j = 0; j < 9; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+
+    private int checkColumns(List<String> A) {
+        for (int j = 0; j < 9; j++) {
+            Set<Character> set = new HashSet<Character>();
+            for (int i = 0; i < 9; i++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+
+    private int checkBox(List<String> A) {
+        Set<Character> set = new HashSet<Character>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 3; j < 6; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 6; j < 9; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 3; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 3; i < 6; i++) {
+            for (int j = 3; j < 6; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 3; i < 6; i++) {
+            for (int j = 6; j < 9; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 6; i < 9; i++) {
+            for (int j = 0; j < 3; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 6; i < 9; i++) {
+            for (int j = 3; j < 6; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        set = new HashSet<Character>();
+        for (int i = 6; i < 9; i++) {
+            for (int j = 6; j < 9; j++) {
+                char c = A.get(i).charAt(j);
+                if (Character.isDigit(c)) {
+                    if (set.contains(c)) {
+                        return 0;
+                    } else {
+                        set.add(c);
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+}
