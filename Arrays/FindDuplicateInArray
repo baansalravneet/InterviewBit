@@ -1,0 +1,14 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int repeatedNumber(final List<Integer> A) {
+        int[] array = new int[A.size()];
+        for (int i : A) {
+            if (array[i - 1] != 0) {
+                return i;
+            } else {
+                array[i - 1] = 1;
+            }
+        }
+        return -1;
+    }
+}
