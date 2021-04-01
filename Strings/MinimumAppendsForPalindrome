@@ -1,0 +1,22 @@
+public class Solution {
+    public int solve(String A) {
+        int i = 0;
+        while (i < A.length() && !isPalindrome(A, i)) {
+            i++;
+        }
+        return i;
+    }
+
+    private boolean isPalindrome(String A, int start) {
+        int i = start;
+        int j = A.length() - 1;
+        while (i <= j && A.charAt(i) == A.charAt(j)) {
+            i++;
+            j--;
+        }
+        if (i > j) {
+            return true;
+        }
+        return false;
+    }
+}
