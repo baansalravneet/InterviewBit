@@ -1,0 +1,21 @@
+public class Solution {
+    public void setZeroes(ArrayList<ArrayList<Integer>> a) {
+        Set<Integer> rowZero = new HashSet<>();
+        Set<Integer> columnZero = new HashSet<>();
+        for (int i = 0; i < a.size(); i++) {
+            for (int j = 0; j < a.get(0).size(); j++) {
+                if (a.get(i).get(j) == 0) {
+                    rowZero.add(i);
+                    columnZero.add(j);
+                }
+            }
+        }
+        for (int i = 0; i < a.size(); i++) {
+            for (int j = 0; j < a.get(0).size(); j++) {
+                if (rowZero.contains(i) || columnZero.contains(j)) {
+                    a.get(i).set(j, 0);
+                }
+            }
+        }
+    }
+}
