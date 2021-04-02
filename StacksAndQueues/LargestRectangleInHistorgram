@@ -1,0 +1,26 @@
+public class Solution {
+    public int largestRectangleArea(ArrayList<Integer> A) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int answer = Integer.MIN_VALUE;
+        for (int i = 0; i < A.size(); i++) {
+            while (!stack.isEmpty() && A.get(stack.peekFirst()) > A.get(i)) {
+                int index = stack.pollFirst();
+                int start = 0;
+                if (!stack.isEmpty()) {
+                    start = stack.peekFirst() + 1;
+                }
+                answer = Math.max(answer, (i - start) * A.get(index));
+            }
+            stack.addFirst(i);
+        }
+        while (!stack.isEmpty()) {
+            int index = stack.pollFirst();
+            int start = 0;
+            if (!stack.isEmpty()) {
+                start = stack.peekFirst() + 1;
+            }
+            answer = Math.max(answer, (A.size() - start) * A.get(index));
+        }
+        return answer;
+    }
+}
