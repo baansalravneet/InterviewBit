@@ -1,0 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ * public int val;
+ * public ListNode next;
+ * ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+    public int lPalin(ListNode A) {
+        ListNode head = A;
+        int length = 0;
+        while (A != null) {
+            length++;
+            A = A.next;
+        }
+        A = head;
+        length = (length / 2) - 1;
+        while (length > 0) {
+            A = A.next;
+            length--;
+        }
+        ListNode reversedHalf = reverse(A.next);
+        A.next = null;
+        while (reversedHalf != null && head != null) {
+            if (reversedHalf.val != head.val) {
+                return 0;
+            }
+            reversedHalf = reversedHalf.next;
+            head = head.next;
+        }
+        return 1;
+    }
+
+    private ListNode reverse(ListNode A) {
+        ListNode prev = null;
+        while (A != null) {
+            ListNode temp = A.next;
+            A.next = prev;
+            prev = A;
+            A = temp;
+        }
+        return prev;
+    }
+}
