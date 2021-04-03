@@ -1,0 +1,31 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> preorderTraversal(TreeNode A) {
+        ArrayList<Integer> answer = new ArrayList<>();
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.addFirst(A);
+        while (!deque.isEmpty()) {
+            TreeNode current = deque.pollFirst();
+            answer.add(current.val);
+            if (current.right != null) {
+                deque.addFirst(current.right);
+            }
+            if (current.left != null) {
+                deque.addFirst(current.left);
+            }
+        }
+        return answer;
+    }
+}
