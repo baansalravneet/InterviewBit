@@ -1,0 +1,17 @@
+public class Solution {
+    public int solve(ArrayList<ArrayList<Integer>> A) {
+        int[] dp = new int[A.size()];
+        dp[0] = 1;
+        int answer = 1;
+        for (int i = 1; i < A.size(); i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (A.get(i).get(0) > A.get(j).get(1)) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            answer = Math.max(answer, dp[i]);
+        }
+        return answer;
+    }
+}
