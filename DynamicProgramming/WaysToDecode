@@ -1,0 +1,30 @@
+public class Solution {
+    private static final long MOD = 1000000007;
+
+    public int numDecodings(String A) {
+        if (A.length() == 0 || A.charAt(0) == '0') {
+            return 0;
+        }
+        int last = 1;
+        int beforeLast = 1;
+        for (int i = 1; i < A.length(); i++) {
+            long answerHere = 0;
+            if (A.charAt(i) != '0') {
+                answerHere += (long) last;
+            }
+            if (makesNumber(A.charAt(i - 1), A.charAt(i))) {
+                answerHere += (long) beforeLast;
+            }
+            beforeLast = last;
+            last = (int) (answerHere % MOD);
+        }
+        return last;
+    }
+
+    private boolean makesNumber(char a, char b) {
+        if (a == '0') {
+            return false;
+        }
+        return Integer.parseInt(String.valueOf(a)) * 10 + Integer.parseInt(String.valueOf(b)) <= 26;
+    }
+}
