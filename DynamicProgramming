@@ -1,0 +1,15 @@
+public class Solution {
+    public int climbStairs(int A) {
+        if (A < 2) {
+            return 1;
+        }
+        int[] array = new int[A + 1];
+        array[0] = 1;
+        array[1] = 1;
+        array[2] = 2;
+        for (int i = 3; i <= A; i++) {
+            array[i] = array[i - 1] + array[i - 2];
+        }
+        return array[A];
+    }
+}
