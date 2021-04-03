@@ -1,0 +1,49 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> solve(TreeNode A, int B) {
+        if (A == null || A.val == B) {
+            return new ArrayList<Integer>();
+        }
+        ArrayList<TreeNode> currentLevel = new ArrayList<>();
+        currentLevel.add(A);
+        while (!currentLevel.isEmpty()) {
+            boolean breakFlag = false;
+            ArrayList<TreeNode> nextLevel = new ArrayList<>();
+            for (TreeNode node : currentLevel) {
+                TreeNode leftChild = node.left;
+                TreeNode rightChild = node.right;
+                if ((leftChild != null && leftChild.val == B) || (rightChild != null && rightChild.val == B)) {
+                    breakFlag = true;
+                } else {
+                    if (leftChild != null) {
+                        nextLevel.add(leftChild);
+                    }
+                    if (rightChild != null) {
+                        nextLevel.add(rightChild);
+                    }
+                }
+            }
+            currentLevel = nextLevel;
+            if (breakFlag) {
+                break;
+            }
+        }
+        ArrayList<Integer> answer = new ArrayList<>();
+        for (TreeNode node : currentLevel) {
+            answer.add(node.val);
+        }
+        return answer;
+    }
+}
