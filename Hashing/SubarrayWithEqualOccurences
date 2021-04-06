@@ -1,0 +1,41 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B, int C) {
+        int[] occurenceB = new int[A.size()];
+        int[] occurenceC = new int[A.size()];
+        int sumB = 0;
+        int sumC = 0;
+        for (int i = 0; i < A.size(); i++) {
+            if (A.get(i) == B) {
+                sumB++;
+            }
+            occurenceB[i] = sumB;
+            if (A.get(i) == C) {
+                sumC++;
+            }
+            occurenceC[i] = sumC;
+        }
+        int answer = 0;
+        for (int i : A) {
+            if (i != B && i != C) {
+                answer++;
+            }
+        }
+        for (int length = 2; length <= A.size(); length++) {
+            int start = -1;
+            int end = 0;
+            while (end != length - 1) {
+                end++;
+            }
+            while (end < A.size()) {
+                int numberB = start == -1 ? occurenceB[end] : occurenceB[end] - occurenceB[start];
+                int numberC = start == -1 ? occurenceC[end] : occurenceC[end] - occurenceC[start];
+                if (numberB == numberC) {
+                    answer++;
+                }
+                start++;
+                end++;
+            }
+        }
+        return answer;
+    }
+}
