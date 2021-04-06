@@ -1,0 +1,21 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        Map<Integer, Integer> cumXORCount = new HashMap<>();
+        int cum = 0;
+        for (int i = 0; i < A.size(); i++) {
+            cum = cum ^ A.get(i);
+            Integer value = cumXORCount.getOrDefault(cum, 0);
+            cumXORCount.put(cum, value + 1);
+        }
+        int answer = 0;
+        for (Map.Entry<Integer, Integer> entry : cumXORCount.entrySet()) {
+            if (entry.getKey() == B) {
+                answer += entry.getValue() * 2;
+                answer += entry.getValue() * cumXORCount.getOrDefault(0, 0);
+            } else {
+                answer += entry.getValue() * cumXORCount.getOrDefault(entry.getKey() ^ B, 0);
+            }
+        }
+        return answer / 2;
+    }
+}
