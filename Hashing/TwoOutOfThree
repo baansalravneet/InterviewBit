@@ -1,0 +1,30 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A, ArrayList<Integer> B, ArrayList<Integer> C) {
+        Set<Integer> answerSet = new HashSet<>();
+        Set<Integer> setA = new HashSet<>();
+        Set<Integer> setB = new HashSet<>();
+        Set<Integer> setC = new HashSet<>();
+        for (int i : A) {
+            setA.add(i);
+        }
+        for (int i : B) {
+            setB.add(i);
+        }
+        for (int i : C) {
+            setC.add(i);
+        }
+        for (int i : C) {
+            if (setA.contains(i) || setB.contains(i)) {
+                answerSet.add(i);
+            }
+        }
+        for (int i : A) {
+            if (setB.contains(i) || setC.contains(i)) {
+                answerSet.add(i);
+            }
+        }
+        ArrayList<Integer> answer = new ArrayList<>(answerSet);
+        Collections.sort(answer);
+        return answer;
+    }
+}
