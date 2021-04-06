@@ -1,0 +1,44 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public ArrayList<Integer> twoSum(final List<Integer> A, int B) {
+        Map<Integer, List<Integer>> numberToIndex = new HashMap<>();
+        for (int i = 0; i < A.size(); i++) {
+            List<Integer> array = numberToIndex.computeIfAbsent(A.get(i), k -> new ArrayList<>());
+            if (array.size() < 2) {
+                array.add(i + 1);
+                Collections.sort(array);
+            }
+        }
+        ArrayList<Integer> answer = new ArrayList<>();
+        answer.add(Integer.MAX_VALUE);
+        answer.add(Integer.MAX_VALUE);
+        for (int i = 0; i < A.size(); i++) {
+            int number = A.get(i);
+            if (numberToIndex.containsKey(B - number)) {
+                int index1 = Math.min(i + 1, numberToIndex.get(B - number).get(0));
+                int index2 = Math.max(i + 1, numberToIndex.get(B - number).get(0));
+                if (number == B - number) {
+                    if (numberToIndex.get(number).size() == 2) {
+                        index1 = numberToIndex.get(number).get(0);
+                        index2 = numberToIndex.get(number).get(1);
+                    } else {
+                        continue;
+                    }
+                }
+                if (index2 < answer.get(1)) {
+                    answer.set(0, index1);
+                    answer.set(1, index2);
+                } else if (index2 == answer.get(1)) {
+                    if (index1 < answer.get(0)) {
+                        answer.set(0, index1);
+                        answer.set(1, index2);
+                    }
+                }
+            }
+        }
+        if (answer.get(0) == Integer.MAX_VALUE) {
+            return new ArrayList<>();
+        }
+        return answer;
+    }
+}
