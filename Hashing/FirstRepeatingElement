@@ -1,0 +1,19 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        Set<Integer> numberSet = new HashSet<>();
+        Set<Integer> repeatingSet = new HashSet<>();
+        for (int i : A) {
+            if (numberSet.contains(i)) {
+                repeatingSet.add(i);
+            } else {
+                numberSet.add(i);
+            }
+        }
+        for (int i : A) {
+            if (repeatingSet.contains(i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
