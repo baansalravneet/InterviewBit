@@ -1,0 +1,40 @@
+public class Solution {
+    public int colorful(int A) {
+        Set<Integer> set = new HashSet<>();
+        List<Integer> digits = new ArrayList<>();
+        while (A != 0) {
+            int number = A % 10;
+            if (number == 0) {
+                if (digits.size() > 0 || A > 0) {
+                    return 0;
+                }
+            }
+            digits.add(number);
+            A = A / 10;
+        }
+        for (int length = 1; length <= digits.size(); length++) {
+            int product = 1;
+            int i = 0;
+            int j = 0;
+            while (j < length) {
+                product = product * digits.get(j);
+                j++;
+            }
+            while (j < digits.size()) {
+                if (set.contains(product)) {
+                    return 0;
+                } else {
+                    set.add(product);
+                }
+                product = product * digits.get(j);
+                product = product / digits.get(i);
+                j++;
+                i++;
+            }
+            if (set.contains(product)) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
