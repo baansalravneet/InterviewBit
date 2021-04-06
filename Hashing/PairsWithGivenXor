@@ -1,0 +1,16 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        Set<Integer> set = new HashSet<>();
+        Set<Integer> answerSet = new HashSet<>();
+        for (int i : A) {
+            set.add(i);
+        }
+        for (int i : A) {
+            if (set.contains(B ^ i)) {
+                answerSet.add(i);
+                answerSet.add(B ^ i);
+            }
+        }
+        return answerSet.size() / 2;
+    }
+}
