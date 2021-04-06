@@ -1,0 +1,27 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> fourSum(ArrayList<Integer> A, int B) {
+        Set<ArrayList<Integer>> answerSet = new HashSet<>();
+        ArrayList<ArrayList<Integer>> answer = new ArrayList<>();
+        Collections.sort(A);
+        for (int i = 0; i < A.size(); i++) {
+            for (int j = i + 1; j < A.size(); j++) {
+                for (int k = j + 1; k < A.size(); k++) {
+                    for (int l = k + 1; l < A.size(); l++) {
+                        if (A.get(i) + A.get(j) + A.get(k) + A.get(l) == B) {
+                            ArrayList<Integer> addThis = new ArrayList<>();
+                            addThis.add(A.get(i));
+                            addThis.add(A.get(j));
+                            addThis.add(A.get(k));
+                            addThis.add(A.get(l));
+                            if (!answerSet.contains(addThis)) {
+                                answer.add(addThis);
+                                answerSet.add(addThis);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return answer;
+    }
+}
