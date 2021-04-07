@@ -1,0 +1,31 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        Map<Integer, List<Integer>> index = new HashMap<>();
+        ArrayList<Integer> answer = new ArrayList<>();
+        for (int i = 0; i < A.size(); i++) {
+            answer.add(A.get(i));
+            if (!index.containsKey(A.get(i)) || index.get(A.get(i)).isEmpty()) {
+                List<Integer> addThis = new ArrayList<>();
+                addThis.add(i);
+                index.put(A.get(i), addThis);
+            } else {
+                int number = A.get(i);
+                List<Integer> list = index.get(number);
+                int firstIndex = list.remove(0);
+                list.add(i);
+                number = number + 1;
+                answer.set(firstIndex, number);
+                if (!index.containsKey(number)) {
+                    List<Integer> addThis = new ArrayList<>();
+                    addThis.add(firstIndex);
+                    index.put(number, addThis);
+                } else {
+                    list = index.get(number);
+                    list.add(firstIndex);
+                    Collections.sort(list);
+                }
+            }
+        }
+        return answer;
+    }
+}
