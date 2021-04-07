@@ -1,0 +1,21 @@
+public class Solution {
+    public int solve(ArrayList<ArrayList<Integer>> A) {
+        Collections.sort(A, new MyComparator());
+        int answer = 1;
+        int last = 0;
+        for (int i = 1; i < A.size(); i++) {
+            if (A.get(i).get(0) > A.get(last).get(1)) {
+                answer++;
+                last = i;
+            }
+        }
+        return answer;
+    }
+
+    class MyComparator implements Comparator<ArrayList<Integer>> {
+        @Override
+        public int compare(ArrayList<Integer> a, ArrayList<Integer> b) {
+            return a.get(1) - b.get(1);
+        }
+    }
+}
