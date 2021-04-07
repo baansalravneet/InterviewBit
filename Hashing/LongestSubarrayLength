@@ -1,0 +1,25 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        int cum = 0;
+        int answer = 0;
+        for (int i = 0; i < A.size(); i++) {
+            if (A.get(i) == 0) {
+                cum--;
+            } else {
+                cum++;
+            }
+            if (!hashMap.containsKey(cum)) {
+                hashMap.put(cum, i);
+            }
+            if (hashMap.containsKey(cum - 1)) {
+                answer = Math.max(answer, i - hashMap.get(cum - 1));
+            }
+            if (cum == 1) {
+                answer = Math.max(answer, i + 1);
+            }
+        }
+
+        return answer;
+    }
+}
