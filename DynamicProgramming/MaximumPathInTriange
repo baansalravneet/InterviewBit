@@ -1,0 +1,22 @@
+public class Solution {
+    public int solve(ArrayList<ArrayList<Integer>> A) {
+        int answer = Integer.MIN_VALUE;
+        for (int i = 1; i < A.size(); i++) {
+            for (int j = 0; j < i + 1; j++) {
+                int value;
+                if (j == 0) {
+                    value = A.get(i).get(j) + A.get(i - 1).get(j);
+                } else if (j != i) {
+                    value = A.get(i).get(j) + Math.max(A.get(i - 1).get(j), A.get(i - 1).get(j - 1));
+                } else {
+                    value = A.get(i).get(j) + A.get(i - 1).get(j - 1);
+                }
+                A.get(i).set(j, value);
+            }
+        }
+        for (int i = 0; i < A.size(); i++) {
+            answer = Math.max(answer, A.get(A.size() - 1).get(i));
+        }
+        return answer;
+    }
+}
