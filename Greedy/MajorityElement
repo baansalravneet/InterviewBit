@@ -1,0 +1,16 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int majorityElement(final List<Integer> A) {
+        Map<Integer, Integer> counts = new HashMap<>();
+        for (int i : A) {
+            int value = counts.getOrDefault(i, 0);
+            counts.put(i, value + 1);
+        }
+        for (int i : A) {
+            if (counts.get(i) > A.size() / 2) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
