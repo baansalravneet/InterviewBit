@@ -1,0 +1,7 @@
+public class Solution {
+    public int maxp3(ArrayList<Integer> A) {
+        Collections.sort(A);
+        int n = A.size() - 1;
+        return Math.max(A.get(n) * A.get(n - 1) * A.get(n - 2), A.get(n) * A.get(0) * A.get(1));
+    }
+}
