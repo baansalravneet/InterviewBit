@@ -1,0 +1,33 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        int[] cumOdd = new int[A.size()];
+        int cum = 0;
+        for (int i = 0; i < A.size(); i++) {
+            if (A.get(i) % 2 != 0) {
+                cum++;
+            }
+            cumOdd[i] = cum;
+        }
+        Map<Integer, Integer> cumCount = new HashMap<>();
+        for (int i = 0; i < A.size(); i++) {
+            int number = cumCount.getOrDefault(cumOdd[i], 0);
+            cumCount.put(cumOdd[i], number + 1);
+        }
+        int answer = 0;
+        if (B == 0) {
+            answer += cumCount.getOrDefault(0, 0);
+            for (int i = 0; i <= cum; i++) {
+                int n = cumCount.getOrDefault(i, 0);
+                answer += ((n) * (n - 1)) / 2;
+            }
+            return answer;
+        }
+        for (int i = 1; i <= cum; i++) {
+            if (i == B) {
+                answer += cumCount.getOrDefault(i, 0);
+            }
+            answer += cumCount.getOrDefault(i, 0) * cumCount.getOrDefault(i - B, 0);
+        }
+        return answer;
+    }
+}
