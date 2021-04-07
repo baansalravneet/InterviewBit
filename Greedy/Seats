@@ -1,0 +1,28 @@
+public class Solution {
+    private static final long MOD = 10000003;
+
+    public int seats(String A) {
+        List<Integer> occupied = new ArrayList<>();
+        for (int i = 0; i < A.length(); i++) {
+            if (A.charAt(i) == 'x') {
+                occupied.add(i);
+            }
+        }
+        if (occupied.size() == 0) {
+            return 0;
+        }
+        List<Integer> finalPositions = new ArrayList<>();
+        int median = occupied.get(occupied.size() / 2);
+        for (int i = median - occupied.size() / 2; i < median + occupied.size() / 2; i++) {
+            finalPositions.add(i);
+        }
+        if (finalPositions.size() != occupied.size()) {
+            finalPositions.add(median + occupied.size() / 2);
+        }
+        long answer = 0;
+        for (int i = 0; i < occupied.size(); i++) {
+            answer = (answer + (long) Math.abs(finalPositions.get(i) - occupied.get(i))) % MOD;
+        }
+        return (int) answer;
+    }
+}
