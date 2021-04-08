@@ -1,0 +1,25 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(ArrayList<Integer> A) {
+        Collections.sort(A);
+        Set<ArrayList<Integer>> answer = new LinkedHashSet<>();
+        answer.add(new ArrayList<>());
+        recursionHelper(answer, A, 0, new ArrayList<>());
+        ArrayList<ArrayList<Integer>> returnThis = new ArrayList<>();
+        returnThis.addAll(answer);
+        return returnThis;
+    }
+
+    private void recursionHelper(Set<ArrayList<Integer>> answer,
+                                 ArrayList<Integer> A,
+                                 int index,
+                                 ArrayList<Integer> current) {
+        if (index == A.size()) {
+            return;
+        }
+        current.add(A.get(index));
+        answer.add(new ArrayList<>(current));
+        recursionHelper(answer, A, index + 1, current);
+        current.remove(current.size() - 1);
+        recursionHelper(answer, A, index + 1, current);
+    }
+}
