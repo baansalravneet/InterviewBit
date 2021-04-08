@@ -1,0 +1,14 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, ArrayList<Integer> B, int C) {
+        int[] dp = new int[C + 1];
+        dp[0] = 0;
+        for (int i = 0; i < A.size(); i++) {
+            int value = A.get(i);
+            int weight = B.get(i);
+            for (int j = C; j >= weight; j--) {
+                dp[j] = Math.max(dp[j], value + dp[j - weight]);
+            }
+        }
+        return dp[C];
+    }
+}
