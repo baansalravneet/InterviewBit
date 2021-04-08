@@ -1,0 +1,60 @@
+public class Solution {
+    private static final char[] key2 = new char[]{'a', 'b', 'c'};
+    private static final char[] key3 = new char[]{'d', 'e', 'f'};
+    private static final char[] key4 = new char[]{'g', 'h', 'i'};
+    private static final char[] key5 = new char[]{'j', 'k', 'l'};
+    private static final char[] key6 = new char[]{'m', 'n', 'o'};
+    private static final char[] key7 = new char[]{'p', 'q', 'r', 's'};
+    private static final char[] key8 = new char[]{'t', 'u', 'v'};
+    private static final char[] key9 = new char[]{'w', 'x', 'y', 'z'};
+    private static final char[] key1 = new char[]{'1'};
+    private static final char[] key0 = new char[]{'0'};
+
+    public ArrayList<String> letterCombinations(String A) {
+        ArrayList<String> answer = new ArrayList<>();
+        recursiveHelper(answer, A, new StringBuilder(), 0);
+        return answer;
+    }
+
+    private void recursiveHelper(ArrayList<String> answer,
+                                 String A,
+                                 StringBuilder current,
+                                 int index) {
+        if (index == A.length()) {
+            answer.add(current.toString());
+            return;
+        }
+        char[] characters = getChars(A.charAt(index));
+        for (int i = 0; i < characters.length; i++) {
+            current.append(characters[i]);
+            recursiveHelper(answer, A, current, index + 1);
+            current.deleteCharAt(current.length() - 1);
+        }
+    }
+
+    private char[] getChars(char a) {
+        switch (a) {
+            case '2':
+                return key2;
+            case '3':
+                return key3;
+            case '4':
+                return key4;
+            case '5':
+                return key5;
+            case '6':
+                return key6;
+            case '7':
+                return key7;
+            case '8':
+                return key8;
+            case '9':
+                return key9;
+            case '1':
+                return key1;
+            case '0':
+                return key0;
+        }
+        return null;
+    }
+}
