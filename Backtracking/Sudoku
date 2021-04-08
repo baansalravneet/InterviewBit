@@ -31,43 +31,31 @@ public class Solution {
     }
 
     private boolean validColumn(ArrayList<ArrayList<Character>> a, int number, int j) {
-        Set<Character> values = new HashSet<>();
-        values.add(Integer.toString(number).charAt(0));
+        char c = Integer.toString(number).charAt(0);
         for (int row = 0; row < 9; row++) {
-            if (a.get(row).get(j) != '.') {
-                if (values.contains(a.get(row).get(j))) {
-                    return false;
-                }
-                values.add(a.get(row).get(j));
+            if (a.get(row).get(j) != '.' && a.get(row).get(j) == c) {
+                return false;
             }
         }
         return true;
     }
 
     private boolean validRow(ArrayList<ArrayList<Character>> a, int number, int i) {
-        Set<Character> values = new HashSet<>();
-        values.add(Integer.toString(number).charAt(0));
+        char c = Integer.toString(number).charAt(0);
         for (int column = 0; column < 9; column++) {
-            if (a.get(i).get(column) != '.') {
-                if (values.contains(a.get(i).get(column))) {
-                    return false;
-                }
-                values.add(a.get(i).get(column));
+            if (a.get(i).get(column) != '.' && a.get(i).get(column) == c) {
+                return false;
             }
         }
         return true;
     }
 
     private boolean validBox(ArrayList<ArrayList<Character>> a, int number, int i, int j) {
-        Set<Character> values = new HashSet<>();
-        values.add(Integer.toString(number).charAt(0));
+        char c = Integer.toString(number).charAt(0);
         for (int row = (i / 3) * 3; row < (i / 3) * 3 + 3; row++) {
             for (int column = (j / 3) * 3; column < (j / 3) * 3 + 3; column++) {
-                if (a.get(row).get(column) != '.') {
-                    if (values.contains(a.get(row).get(column))) {
-                        return false;
-                    }
-                    values.add(a.get(row).get(column));
+                if (a.get(row).get(column) != '.' && a.get(row).get(column) == c) {
+                    return false;
                 }
             }
         }
