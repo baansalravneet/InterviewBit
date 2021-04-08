@@ -1,0 +1,88 @@
+public class Solution {
+    public ArrayList<ArrayList<String>> solveNQueens(int a) {
+        ArrayList<ArrayList<String>> answer = new ArrayList<>();
+        boolean[][] board = new boolean[a][a];
+        recursiveHelper(answer, board, 0, a);
+        return answer;
+    }
+
+    private void recursiveHelper(ArrayList<ArrayList<String>> answer,
+                                 boolean[][] board,
+                                 int row,
+                                 int a) {
+        if (row == a) {
+            generateAnswer(answer, board, a);
+            return;
+        }
+        for (int i = 0; i < a; i++) {
+            if (isValidPlacement(board, row, i, a)) {
+                board[row][i] = true;
+                recursiveHelper(answer, board, row + 1, a);
+                board[row][i] = false;
+            }
+        }
+    }
+
+    private void generateAnswer(ArrayList<ArrayList<String>> answer,
+                                boolean[][] board,
+                                int a) {
+        ArrayList<String> current = new ArrayList<>();
+        for (int i = 0; i < a; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < a; j++) {
+                if (board[i][j]) {
+                    sb.append('Q');
+                } else {
+                    sb.append('.');
+                }
+            }
+            current.add(sb.toString());
+        }
+        answer.add(current);
+    }
+
+    private boolean isValidPlacement(boolean[][] board, int row, int column, int a) {
+        for (int i = 0; i < a; i++) {
+            if (board[row][i] || board[i][column]) {
+                return false;
+            }
+        }
+        int i = row;
+        int j = column;
+        while (i < a && j < a) {
+            if (board[i][j]) {
+                return false;
+            }
+            i++;
+            j++;
+        }
+        i = row;
+        j = column;
+        while (i < a && j >= 0) {
+            if (board[i][j]) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        i = row;
+        j = column;
+        while (i >= 0 && j < a) {
+            if (board[i][j]) {
+                return false;
+            }
+            i--;
+            j++;
+        }
+        i = row;
+        j = column;
+        while (i >= 0 && j >= 0) {
+            if (board[i][j]) {
+                return false;
+            }
+            i--;
+            j--;
+        }
+        return true;
+    }
+}
