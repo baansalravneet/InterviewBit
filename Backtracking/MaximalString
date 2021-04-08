@@ -1,0 +1,45 @@
+public class Solution {
+    public String solve(String A, int B) {
+        Answer answer = new Answer(A);
+        recursionHelper(new StringBuilder(A), B, 0, answer);
+        return answer.a;
+    }
+
+    private void recursionHelper(StringBuilder A, int B, int start, Answer answer) {
+        if (B == 0 || start == A.length()) {
+            if (A.toString().compareTo(answer.a) > 0) {
+                answer.a = A.toString();
+            }
+            return;
+        }
+        for (int i = start + 1; i < A.length(); i++) {
+            swap(A, start, i);
+            if (A.toString().compareTo(answer.a) > 0) {
+                answer.a = A.toString();
+            }
+            recursionHelper(A, B - 1, start + 1, answer);
+            if (A.toString().compareTo(answer.a) > 0) {
+                answer.a = A.toString();
+            }
+            swap(A, start, i);
+            recursionHelper(A, B, start + 1, answer);
+            if (A.toString().compareTo(answer.a) > 0) {
+                answer.a = A.toString();
+            }
+        }
+    }
+
+    private void swap(StringBuilder A, int a, int b) {
+        char temp = A.charAt(a);
+        A.setCharAt(a, A.charAt(b));
+        A.setCharAt(b, temp);
+    }
+
+    class Answer {
+        String a;
+
+        Answer(String a) {
+            this.a = a;
+        }
+    }
+}
