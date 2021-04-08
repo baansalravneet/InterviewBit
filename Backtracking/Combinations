@@ -1,0 +1,26 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combine(int A, int B) {
+        ArrayList<ArrayList<Integer>> answer = new ArrayList<>();
+        recursionHelper(answer, new ArrayList<>(), A, B, 1);
+        return answer;
+    }
+
+    private void recursionHelper(ArrayList<ArrayList<Integer>> answer,
+                                 ArrayList<Integer> current,
+                                 int A,
+                                 int B,
+                                 int start) {
+        if (current.size() == B) {
+            answer.add(new ArrayList<>(current));
+            return;
+        }
+        if (start == A + 1) {
+            return;
+        }
+        for (int i = start; i <= A; i++) {
+            current.add(i);
+            recursionHelper(answer, current, A, B, i + 1);
+            current.remove(current.size() - 1);
+        }
+    }
+}
