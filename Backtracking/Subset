@@ -1,0 +1,23 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(ArrayList<Integer> A) {
+        Collections.sort(A);
+        ArrayList<ArrayList<Integer>> answer = new ArrayList<>();
+        answer.add(new ArrayList<>());
+        recursionHelper(A, answer, 0, new ArrayList<>());
+        return answer;
+    }
+
+    private void recursionHelper(ArrayList<Integer> A,
+                                 ArrayList<ArrayList<Integer>> answer,
+                                 int index,
+                                 ArrayList<Integer> current) {
+        if (index == A.size()) {
+            return;
+        }
+        current.add(A.get(index));
+        answer.add(new ArrayList<>(current));
+        recursionHelper(A, answer, index + 1, current);
+        current.remove(current.size() - 1);
+        recursionHelper(A, answer, index + 1, current);
+    }
+}
