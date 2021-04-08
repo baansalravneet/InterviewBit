@@ -1,0 +1,33 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combinationSum(ArrayList<Integer> A, int B) {
+        Collections.sort(A);
+        ArrayList<ArrayList<Integer>> answer = new ArrayList<>();
+        ArrayList<Integer> current = new ArrayList<>();
+        recursionHelper(A, answer, current, 0, B);
+        return answer;
+    }
+
+    private void recursionHelper(ArrayList<Integer> A,
+                                 ArrayList<ArrayList<Integer>> answer,
+                                 ArrayList<Integer> current,
+                                 int start,
+                                 int target) {
+        if (target < 0) {
+            return;
+        }
+        if (target == 0) {
+            if (answer.isEmpty() || !answer.get(answer.size() - 1).equals(current)) {
+                answer.add(new ArrayList<>(current));
+            }
+            return;
+        }
+        if (start == A.size()) {
+            return;
+        }
+        for (int i = start; i < A.size(); i++) {
+            current.add(A.get(i));
+            recursionHelper(A, answer, current, i + 1, target - A.get(i));
+            current.remove(current.size() - 1);
+        }
+    }
+}
