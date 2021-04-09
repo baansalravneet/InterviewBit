@@ -1,0 +1,32 @@
+public class Solution {
+    public ArrayList<String> generateParenthesis(int A) {
+        ArrayList<String> answer = new ArrayList<>();
+        recursionHelper(answer, 0, 0, new StringBuilder(), A);
+        return answer;
+    }
+
+    private void recursionHelper(ArrayList<String> answer,
+                                 int openings,
+                                 int closings,
+                                 StringBuilder current,
+                                 int A) {
+        if (openings == A && closings == A) {
+            answer.add(current.toString());
+            return;
+        }
+        if (openings == A) {
+            current.append(')');
+            recursionHelper(answer, openings, closings + 1, current, A);
+            current.deleteCharAt(current.length() - 1);
+            return;
+        }
+        current.append('(');
+        recursionHelper(answer, openings + 1, closings, current, A);
+        current.deleteCharAt(current.length() - 1);
+        if (openings > closings) {
+            current.append(')');
+            recursionHelper(answer, openings, closings + 1, current, A);
+            current.deleteCharAt(current.length() - 1);
+        }
+    }
+}
