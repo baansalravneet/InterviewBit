@@ -1,0 +1,30 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> permute(ArrayList<Integer> A) {
+        Collections.sort(A);
+        ArrayList<ArrayList<Integer>> answer = new ArrayList<>();
+        recursionHelper(answer, A, 0);
+        return answer;
+    }
+
+    private void recursionHelper(ArrayList<ArrayList<Integer>> answer,
+                                 ArrayList<Integer> A,
+                                 int start) {
+        if (start == A.size()) {
+            return;
+        }
+        if (answer.isEmpty() || !answer.get(answer.size() - 1).equals(A)) {
+            answer.add(new ArrayList<>(A));
+        }
+        for (int i = start; i < A.size(); i++) {
+            swap(A, start, i);
+            recursionHelper(answer, A, start + 1);
+            swap(A, start, i);
+        }
+    }
+
+    private void swap(ArrayList<Integer> A, int a, int b) {
+        int temp = A.get(a);
+        A.set(a, A.get(b));
+        A.set(b, temp);
+    }
+}
