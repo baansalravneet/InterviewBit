@@ -1,0 +1,34 @@
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ * int val;
+ * TreeLinkNode left, right, next;
+ * TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        while (root != null) {
+            TreeLinkNode nextLevelStart = null;
+            TreeLinkNode pointer = new TreeLinkNode(-1);
+            while (root != null) {
+                if (root.left != null) {
+                    pointer.next = root.left;
+                    if (nextLevelStart == null) {
+                        nextLevelStart = pointer.next;
+                    }
+                    pointer = pointer.next;
+                }
+                if (root.right != null) {
+                    pointer.next = root.right;
+                    if (nextLevelStart == null) {
+                        nextLevelStart = pointer.next;
+                    }
+                    pointer = pointer.next;
+                }
+                root = root.next;
+            }
+            root = nextLevelStart;
+        }
+    }
+}
