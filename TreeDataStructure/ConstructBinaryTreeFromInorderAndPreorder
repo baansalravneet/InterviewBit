@@ -1,0 +1,46 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(ArrayList<Integer> A, ArrayList<Integer> B) {
+        Map<Integer, Integer> inorderMap = new HashMap<>();
+        for (int i = 0; i < B.size(); i++) {
+            inorderMap.put(B.get(i), i);
+        }
+        return recursionHelper(A, inorderMap, 0, A.size() - 1);
+    }
+
+    private TreeNode recursionHelper(ArrayList<Integer> A,
+                                     Map<Integer, Integer> inorderMap,
+                                     int start,
+                                     int end) {
+        if (start >= A.size()) {
+            return null;
+        }
+        if (start > end) {
+            return null;
+        }
+        if (start == end) {
+            return new TreeNode(A.get(start));
+        }
+        TreeNode root = new TreeNode(A.get(start));
+        int leftTreeStart = start + 1;
+        int leftTreeEnd = start + 1;
+        while (leftTreeEnd < A.size() && inorderMap.get(A.get(leftTreeEnd)) < inorderMap.get(A.get(start))) {
+            leftTreeEnd++;
+        }
+        root.left = recursionHelper(A, inorderMap, leftTreeStart, leftTreeEnd - 1);
+        root.right = recursionHelper(A, inorderMap, leftTreeEnd, end);
+        return root;
+    }
+}
