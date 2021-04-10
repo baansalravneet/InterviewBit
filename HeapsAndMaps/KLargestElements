@@ -1,0 +1,18 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A, int B) {
+        ArrayList<Integer> answer = new ArrayList<>();
+        Queue<Integer> pq = new PriorityQueue<Integer>();
+        int i = 0;
+        while (i < B) {
+            pq.add(A.get(i));
+            i++;
+        }
+        while (i < A.size()) {
+            pq.add(A.get(i));
+            pq.poll();
+            i++;
+        }
+        answer.addAll(pq);
+        return answer;
+    }
+}
