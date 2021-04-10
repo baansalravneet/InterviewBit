@@ -1,0 +1,22 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<ArrayList<Integer>> A) {
+        Queue<ArrayList<Integer>> pq = new PriorityQueue<>(new Comparator<ArrayList<Integer>>() {
+            @Override
+            public int compare(ArrayList<Integer> a, ArrayList<Integer> b) {
+                return a.get(0) - b.get(0);
+            }
+        });
+        ArrayList<Integer> answer = new ArrayList<>();
+        for (int i = 0; i < A.size(); i++) {
+            pq.add(A.get(i));
+        }
+        while (!pq.isEmpty()) {
+            ArrayList<Integer> current = pq.poll();
+            answer.add(current.get(0));
+            if (current.size() != 1) {
+                pq.add(new ArrayList<Integer>(current.subList(1, current.size())));
+            }
+        }
+        return answer;
+    }
+}
