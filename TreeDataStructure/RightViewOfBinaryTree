@@ -1,0 +1,35 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> solve(TreeNode A) {
+        Map<Integer, Integer> depthMap = new TreeMap<>();
+        recursionHelper(depthMap, A, 0);
+        ArrayList<Integer> answer = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : depthMap.entrySet()) {
+            answer.add(entry.getValue());
+        }
+        return answer;
+    }
+
+    private void recursionHelper(Map<Integer, Integer> depthMap,
+                                 TreeNode A,
+                                 int currentDepth) {
+        if (A == null) {
+            return;
+        }
+        recursionHelper(depthMap, A.left, currentDepth + 1);
+        depthMap.put(currentDepth, A.val);
+        recursionHelper(depthMap, A.right, currentDepth + 1);
+    }
+}
