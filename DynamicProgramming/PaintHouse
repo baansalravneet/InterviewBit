@@ -1,0 +1,16 @@
+public class Solution {
+    public int solve(ArrayList<ArrayList<Integer>> A) {
+        int lastRed = A.get(0).get(0);
+        int lastBlue = A.get(0).get(1);
+        int lastGreen = A.get(0).get(2);
+        for (int i = 1; i < A.size(); i++) {
+            int thisRed = A.get(i).get(0) + Math.min(lastBlue, lastGreen);
+            int thisBlue = A.get(i).get(1) + Math.min(lastRed, lastGreen);
+            int thisGreen = A.get(i).get(2) + Math.min(lastRed, lastBlue);
+            lastRed = thisRed;
+            lastBlue = thisBlue;
+            lastGreen = thisGreen;
+        }
+        return Math.min(lastRed, Math.min(lastBlue, lastGreen));
+    }
+}
