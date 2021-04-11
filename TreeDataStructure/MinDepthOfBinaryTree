@@ -1,0 +1,36 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    private int answer;
+
+    public int minDepth(TreeNode A) {
+        this.answer = Integer.MAX_VALUE;
+        recursionHelper(A, 1);
+        return this.answer;
+    }
+
+    private void recursionHelper(TreeNode A, int currentDepth) {
+        if (A == null) {
+            return;
+        }
+        if (A.left == null && A.right == null) {
+            if (currentDepth < this.answer) {
+                this.answer = currentDepth;
+            }
+            return;
+        }
+        recursionHelper(A.left, currentDepth + 1);
+        recursionHelper(A.right, currentDepth + 1);
+    }
+}
