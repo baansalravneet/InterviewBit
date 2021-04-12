@@ -1,0 +1,25 @@
+public class Solution {
+    public ArrayList<Integer> solve(int A, ArrayList<Integer> B) {
+        Deque<Integer> indexToUse = new ArrayDeque<>();
+        for (int i = 0; i < B.size(); i++) {
+            if (indexToUse.isEmpty() || (B.get(i) < B.get(indexToUse.peekLast()) && B.get(i) <= A)) {
+                indexToUse.addLast(i);
+            }
+        }
+        int minPower = B.get(indexToUse.peekLast());
+        int answerSize = A / minPower;
+        ArrayList<Integer> answer = new ArrayList<>();
+        while (A >= 0 && !indexToUse.isEmpty() && answerSize != 0) {
+            int index = indexToUse.peekFirst();
+            int power = B.get(index);
+            if ((A - power) >= (answerSize - 1) * minPower) {
+                answer.add(index);
+                A = A - power;
+                answerSize--;
+            } else {
+                indexToUse.pollFirst();
+            }
+        }
+        return answer;
+    }
+}
