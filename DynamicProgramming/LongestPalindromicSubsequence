@@ -1,0 +1,33 @@
+public class Solution {
+    public int solve(String A) {
+        String B = (new StringBuilder(A)).reverse().toString();
+        int[][] dp = new int[A.length()][B.length()];
+        if (A.charAt(0) == B.charAt(0)) {
+            dp[0][0] = 1;
+        }
+        for (int i = 1; i < A.length(); i++) {
+            if (A.charAt(i) == B.charAt(0)) {
+                dp[i][0] = 1;
+            } else {
+                dp[i][0] = dp[i - 1][0];
+            }
+        }
+        for (int j = 1; j < B.length(); j++) {
+            if (A.charAt(0) == B.charAt(j)) {
+                dp[0][j] = 1;
+            } else {
+                dp[0][j] = dp[0][j - 1];
+            }
+        }
+        for (int i = 1; i < A.length(); i++) {
+            for (int j = 1; j < B.length(); j++) {
+                if (A.charAt(i) == B.charAt(j)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+                }
+            }
+        }
+        return dp[A.length() - 1][B.length() - 1];
+    }
+}
