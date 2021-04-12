@@ -1,0 +1,29 @@
+public class Solution {
+    public int anytwo(String A) {
+        int[][] dp = new int[A.length()][A.length()];
+        for (int i = 1; i < A.length(); i++) {
+            if (A.charAt(i) == A.charAt(0)) {
+                dp[i][0] = 1;
+            } else {
+                dp[i][0] = dp[i - 1][0];
+            }
+        }
+        for (int j = 1; j < A.length(); j++) {
+            if (A.charAt(0) == A.charAt(j)) {
+                dp[0][j] = 1;
+            } else {
+                dp[0][j] = dp[0][j - 1];
+            }
+        }
+        for (int i = 1; i < A.length(); i++) {
+            for (int j = 1; j < A.length(); j++) {
+                if (A.charAt(i) == A.charAt(j) && i != j) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+                }
+            }
+        }
+        return dp[A.length() - 1][A.length() - 1] >= 2 ? 1 : 0;
+    }
+}
