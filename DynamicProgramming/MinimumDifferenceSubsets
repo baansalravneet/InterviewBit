@@ -1,0 +1,35 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        int answer = Integer.MAX_VALUE;
+        int totalSum = 0;
+        for (int i : A) {
+            totalSum += i;
+        }
+        boolean[][] dp = new boolean[A.size()][totalSum + 1];
+        dp[0][0] = true;
+        for (int sum = 1; sum <= totalSum; sum++) {
+            if (A.get(0) == sum) {
+                dp[0][sum] = true;
+                answer = Math.min(answer, Math.abs(sum - totalSum + sum));
+            }
+        }
+        for (int sum = 0; sum <= totalSum; sum++) {
+            for (int i = 1; i < A.size(); i++) {
+                if (sum == 0 || A.get(i) == sum) {
+                    dp[i][sum] = true;
+                    answer = Math.min(answer, Math.abs(sum - totalSum + sum));
+                    continue;
+                }
+                if (A.get(i) > sum) {
+                    dp[i][sum] = dp[i - 1][sum];
+                    continue;
+                }
+                if (dp[i - 1][sum] || dp[i - 1][sum - A.get(i)]) {
+                    dp[i][sum] = true;
+                    answer = Math.min(answer, Math.abs(sum - totalSum + sum));
+                }
+            }
+        }
+        return answer;
+    }
+}
