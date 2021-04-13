@@ -1,0 +1,20 @@
+public class Solution {
+    private static final long MOD = 1000000007;
+
+    public int solve(int A) {
+        long[] dpFilled = new long[A + 1];
+        long[] dpHalf = new long[A + 1];
+        dpFilled[0] = 1;
+        dpFilled[1] = 0;
+        dpHalf[0] = 0;
+        dpHalf[1] = 1;
+        for (int i = 2; i <= A; i++) {
+            dpFilled[i] = (dpFilled[i - 2] + 2 * dpHalf[i - 1]) % MOD;
+            dpHalf[i] = (dpFilled[i - 1] + dpHalf[i - 2]) % MOD;
+        }
+        if (A % 2 != 0) {
+            return 0;
+        }
+        return (int) dpFilled[A];
+    }
+}
