@@ -1,0 +1,34 @@
+public class Solution {
+    public ArrayList<Integer> flip(String A) {
+        ArrayList<Integer> answer = new ArrayList<>();
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < A.length(); i++) {
+            if (A.charAt(i) == '0') {
+                numbers.add(1);
+            } else {
+                numbers.add(-1);
+            }
+        }
+        int sumSoFar = 0;
+        int startingIndex = 1;
+        int maxSum = -1;
+        answer.add(-1);
+        answer.add(-1);
+        for (int i = 0; i < A.length(); i++) {
+            if (sumSoFar < 0) {
+                sumSoFar = 0;
+                startingIndex = i + 1;
+            }
+            sumSoFar += numbers.get(i);
+            if (sumSoFar > maxSum) {
+                maxSum = sumSoFar;
+                answer.set(0, startingIndex);
+                answer.set(1, i + 1);
+            }
+        }
+        if (answer.get(0) == -1) {
+            return new ArrayList<>();
+        }
+        return answer;
+    }
+}
