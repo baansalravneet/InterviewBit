@@ -1,0 +1,40 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    private static final int MOD = 1003;
+    private int answer;
+
+    public int sumNumbers(TreeNode A) {
+        answer = 0;
+        recursionHelper(A, 0);
+        return answer;
+    }
+
+    private void recursionHelper(TreeNode A, int sumSoFar) {
+        sumSoFar *= 10;
+        sumSoFar += A.val;
+        sumSoFar %= MOD;
+        if (A.left == null && A.right == null) {
+            answer += sumSoFar;
+            answer %= MOD;
+            return;
+        }
+        if (A.left != null) {
+            recursionHelper(A.left, sumSoFar);
+        }
+        if (A.right != null) {
+            recursionHelper(A.right, sumSoFar);
+        }
+    }
+}
