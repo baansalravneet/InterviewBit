@@ -1,0 +1,51 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
+ * }
+ */
+
+public class Solution {
+
+    private Deque<TreeNode> stack;
+
+    public Solution(TreeNode root) {
+        this.stack = new ArrayDeque<>();
+        populateStack(root);
+    }
+
+    /**
+     * @return whether we have a next smallest number
+     */
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+
+    /**
+     * @return the next smallest number
+     */
+    public int next() {
+        if (this.stack.isEmpty()) {
+            return -1;
+        }
+        TreeNode current = this.stack.pollFirst();
+        populateStack(current.right);
+        return current.val;
+    }
+
+    private void populateStack(TreeNode current) {
+        while (current != null) {
+            this.stack.addFirst(current);
+            current = current.left;
+        }
+    }
+}
+
+/**
+ * Your Solution will be called like this:
+ * Solution i = new Solution(root);
+ * while (i.hasNext()) System.out.print(i.next());
+ */
