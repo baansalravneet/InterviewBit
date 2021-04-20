@@ -1,0 +1,37 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    public int solve(TreeNode A) {
+        int maxSum = Integer.MIN_VALUE;
+        ArrayList<TreeNode> levelOrder = new ArrayList<>();
+        levelOrder.add(A);
+        while (!levelOrder.isEmpty()) {
+            ArrayList<TreeNode> nextLevel = new ArrayList<>();
+            int sum = 0;
+            for (int i = 0; i < levelOrder.size(); i++) {
+                TreeNode current = levelOrder.get(i);
+                sum += current.val;
+                if (current.left != null) {
+                    nextLevel.add(current.left);
+                }
+                if (current.right != null) {
+                    nextLevel.add(current.right);
+                }
+            }
+            maxSum = Math.max(maxSum, sum);
+            levelOrder = nextLevel;
+        }
+        return maxSum;
+    }
+}
