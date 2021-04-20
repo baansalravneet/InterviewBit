@@ -1,0 +1,42 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST
+    public int repeatedNumber(final List<Integer> A) {
+        int number1 = -1;
+        int count1 = 0;
+        int number2 = -1;
+        int count2 = 0;
+        for (int i : A) {
+            if (i == number1) {
+                count1++;
+            } else if (i == number2) {
+                count2++;
+            } else if (count1 == 0) {
+                number1 = i;
+            } else if (count2 == 0) {
+                number2 = i;
+            } else {
+                count1--;
+                count2--;
+            }
+        }
+        int count = 0;
+        for (int i : A) {
+            if (i == number1) {
+                count++;
+            }
+        }
+        if (count > A.size() / 3) {
+            return number1;
+        }
+        count = 0;
+        for (int i : A) {
+            if (i == number2) {
+                count++;
+            }
+        }
+        if (count > A.size() / 3) {
+            return number2;
+        }
+        return -1;
+    }
+}
