@@ -1,0 +1,49 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) {
+ * val = x;
+ * left=null;
+ * right=null;
+ * }
+ * }
+ */
+public class Solution {
+    public int t2Sum(TreeNode A, int B) {
+        Deque<TreeNode> maxStack = new ArrayDeque<>();
+        Deque<TreeNode> minStack = new ArrayDeque<>();
+
+        reachMax(maxStack, A);
+        reachMin(minStack, A);
+
+        while (minStack.peek() != maxStack.peek()) {
+            int sum = maxStack.peekFirst().val + minStack.peekFirst().val;
+            if (sum == B) {
+                return 1;
+            }
+            if (sum > B) {
+                reachMax(maxStack, maxStack.pollFirst().left);
+            } else {
+                reachMin(minStack, minStack.pollFirst().right);
+            }
+        }
+        return 0;
+    }
+
+    private void reachMax(Deque<TreeNode> maxStack, TreeNode current) {
+        while (current != null) {
+            maxStack.addFirst(current);
+            current = current.right;
+        }
+    }
+
+    private void reachMin(Deque<TreeNode> minStack, TreeNode current) {
+        while (current != null) {
+            minStack.addFirst(current);
+            current = current.left;
+        }
+    }
+}
