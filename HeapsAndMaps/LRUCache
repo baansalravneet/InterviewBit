@@ -1,0 +1,83 @@
+public class Solution {
+
+    private int capacity;
+    private Node head;
+    private Node tail;
+    private Map<Integer, Node> keyNodes;
+
+    public Solution(int capacity) {
+        keyNodes = new HashMap<>();
+        this.capacity = capacity;
+        head = null;
+        tail = null;
+    }
+
+    public int get(int key) {
+        if (keyNodes.containsKey(key)) {
+            Node node = keyNodes.get(key);
+            moveToHead(node);
+            return node.val;
+        }
+        return -1;
+    }
+
+    public void set(int key, int value) {
+        Node node;
+        if (keyNodes.containsKey(key)) {
+            node = keyNodes.get(key);
+            node.val = value;
+        } else {
+            node = new Node();
+            node.val = value;
+            node.key = key;
+            keyNodes.put(key, node);
+        }
+        if (tail == null) {
+            tail = node;
+        }
+        moveToHead(node);
+        while (keyNodes.size() > capacity) {
+            keyNodes.remove(popTail().key);
+        }
+    }
+
+    private Node popTail() {
+        Node tailNode = tail;
+        tail = tail.next;
+        tail.prev = null;
+        return tailNode;
+    }
+
+    private void moveToHead(Node node) {
+        if (head == null || head == node) {
+            head = node;
+            return;
+        }
+        freeNode(node);
+        head.next = node;
+        node.next = null;
+        node.prev = head;
+        head = node;
+    }
+
+    private void freeNode(Node node) {
+        if (tail == node) {
+            tail = tail.next;
+        }
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        }
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        }
+        node.prev = null;
+        node.next = null;
+    }
+
+    class Node {
+        int key;
+        int val;
+        Node prev;
+        Node next;
+    }
+}
