@@ -1,0 +1,45 @@
+public class Solution {
+    public int solve(ArrayList<ArrayList<Integer>> A) {
+        if (A.size() == 0 || A.get(0).size() == 0) {
+            return 0;
+        }
+        int n = A.size();
+        int m = A.get(0).size();
+        int[][] dp = getDP(A);
+        int count = 0;
+        for (int row1 = 0; row1 < n; row1++) {
+            for (int row2 = row1; row2 < n; row2++) {
+                Map<Integer, Integer> sumMap = new HashMap<>();
+                for (int j = 0; j < m; j++) {
+                    int sum = dp[row2][j] - (row1 > 0 ? dp[row1 - 1][j] : 0);
+                    if (sum == 0) {
+                        count++;
+                    }
+                    count += sumMap.getOrDefault(sum, 0);
+                    sumMap.put(sum, sumMap.getOrDefault(sum, 0) + 1);
+                }
+            }
+        }
+        return count;
+    }
+
+    private int[][] getDP(ArrayList<ArrayList<Integer>> A) {
+        int n = A.size();
+        int m = A.get(0).size();
+        int[][] dp = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (i == 0 && j == 0) {
+                    dp[i][j] = A.get(0).get(0);
+                } else if (i == 0) {
+                    dp[i][j] = dp[i][j - 1] + A.get(i).get(j);
+                } else if (j == 0) {
+                    dp[i][j] = dp[i - 1][j] + A.get(i).get(j);
+                } else {
+                    dp[i][j] = (int) ((long) dp[i - 1][j] + dp[i][j - 1] - dp[i - 1][j - 1] + A.get(i).get(j));
+                }
+            }
+        }
+        return dp;
+    }
+}
