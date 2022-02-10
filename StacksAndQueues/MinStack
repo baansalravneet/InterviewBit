@@ -1,0 +1,41 @@
+class Solution {
+
+    private Deque<Integer> stack;
+    private Deque<Integer> minValueStack;
+
+    public Solution() {
+        stack = new ArrayDeque<>();
+        minValueStack = new ArrayDeque<>();
+    }
+
+    public void push(int x) {
+        stack.addLast(x);
+        if (minValueStack.isEmpty()) {
+            minValueStack.addLast(x);
+        } else {
+            int currentMin = minValueStack.peekLast();
+            minValueStack.addLast(Math.min(currentMin, x));
+        }
+    }
+
+    public void pop() {
+        if (!stack.isEmpty()) {
+            stack.pollLast();
+            minValueStack.pollLast();
+        }
+    }
+
+    public int top() {
+        if (stack.isEmpty()) {
+            return -1;
+        }
+        return stack.peekLast();
+    }
+
+    public int getMin() {
+        if (stack.isEmpty()) {
+            return -1;
+        }
+        return minValueStack.peekLast();
+    }
+}
