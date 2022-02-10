@@ -1,35 +1,30 @@
 /**
  * Definition for singly-linked list.
  * class ListNode {
- * public int val;
- * public ListNode next;
- * ListNode(int x) { val = x; next = null; }
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
  * }
  */
 public class Solution {
     public ListNode solve(ListNode A) {
-        final ListNode answer = A;
-        int ones = 0;
-        int zeros = 0;
-        while (A != null) {
-            if (A.val == 0) {
-                zeros++;
+        ListNode z = new ListNode(0);
+        ListNode o = new ListNode(1);
+        ListNode aPointer = A;
+        ListNode zPointer = z;
+        ListNode oPointer = o;
+        while (aPointer != null) {
+            if (aPointer.val == 1) {
+                oPointer.next = aPointer;
+                oPointer = oPointer.next;
             } else {
-                ones++;
+                zPointer.next = aPointer;
+                zPointer = zPointer.next;
             }
-            A = A.next;
+            aPointer = aPointer.next;
         }
-        A = answer;
-        while (zeros > 0 || ones > 0) {
-            if (zeros > 0) {
-                A.val = 0;
-                zeros--;
-            } else {
-                A.val = 1;
-                ones--;
-            }
-            A = A.next;
-        }
-        return answer;
+        zPointer.next = o.next;
+        oPointer.next = null;
+        return z.next;
     }
 }
