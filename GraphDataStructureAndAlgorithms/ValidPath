@@ -1,0 +1,46 @@
+public class Solution {
+    public String solve(int x, int y, int N, int R, ArrayList<Integer> xCords, ArrayList<Integer> yCords) {
+        boolean[][] visited = new boolean[x+1][y+1];
+        if (dfs(0,0,x,y,R,xCords,yCords,visited)) {
+            return "YES";
+        }
+        return "NO";
+    }
+    private boolean dfs(int currX, int currY, int x, int y, int radius, ArrayList<Integer> xCords, ArrayList<Integer> yCords, boolean[][] visited) {
+      if (!isValid(currX, currY, x, y, radius, xCords, yCords)) {
+        return false;
+      }
+      if (visited[currX][currY]) {
+        return false;
+      }
+      visited[currX][currY] = true;
+      if (currX == x && currY == y) {
+        return true;
+      }
+      return dfs(currX-1, currY-1, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX-1, currY, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX-1, currY+1, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX, currY-1, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX, currY, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX, currY+1, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX+1, currY-1, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX+1, currY, x, y, radius, xCords, yCords, visited) ||
+      dfs(currX+1, currY+1, x, y, radius, xCords, yCords, visited);
+
+    }
+    // this can be pre-processed and stored
+    private boolean isValid(int currX, int currY, int x, int y, int radius, ArrayList<Integer> xCords, ArrayList<Integer> yCords) {
+      if (currX > x || currY > y) {
+        return false;
+      }
+      if (currX < 0 || currY < 0) {
+        return false;
+      }
+      for (int i = 0; i < xCords.size(); i++) {
+        if (Math.pow(currX-xCords.get(i), 2) + Math.pow(currY-yCords.get(i), 2) <= radius * radius) {
+          return false;
+        }
+      }
+      return true;
+    }
+}
