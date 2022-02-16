@@ -1,0 +1,32 @@
+public class Solution {
+    public int solve(int A, ArrayList<ArrayList<Integer>> B) {
+        boolean[] visited = new boolean[A];
+        Deque<Integer> dfs = new ArrayDeque<>();
+        Map<Integer, List<Integer>> edges = new HashMap<>();
+        for (List<Integer> i : B) {
+            if (edges.containsKey(i.get(0))) {
+                edges.get(i.get(0)).add(i.get(1));
+            } else {
+                List<Integer> edge = new ArrayList<>();
+                edge.add(i.get(1));
+                edges.put(i.get(0), edge);
+            }
+        }
+        dfs.addLast(1);
+        while (!dfs.isEmpty()) {
+            int current = dfs.pollLast();
+            visited[current-1] = true;
+            if (current == A) {
+                return 1;
+            }
+            if (edges.containsKey(current)) {
+                for (int i : edges.get(current)) {
+                    if (!visited[i-1]) {
+                        dfs.addLast(i);
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+}
