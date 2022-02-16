@@ -1,0 +1,53 @@
+public class Solution {
+  public int solve(ArrayList<Integer> A, ArrayList<ArrayList<Integer>> B, int C) {
+    int n = A.size();
+    boolean[] visited = new boolean[n];
+    Map<Integer, HashSet<Integer>> edges = new HashMap<>();
+    for (int i = 0; i < B.size(); i++) {
+      HashSet<Integer> nextNodes = edges.getOrDefault(B.get(i).get(0), new HashSet<>());
+      nextNodes.add(B.get(i).get(1));
+      edges.put(B.get(i).get(0), nextNodes);
+      nextNodes = edges.getOrDefault(B.get(i).get(1), new HashSet<>());
+      nextNodes.add(B.get(i).get(0));
+      edges.put(B.get(i).get(1), nextNodes);
+    }
+    return findPaths(1, 0, C, 0, A, visited, edges);
+  }
+  private int findPaths(int currentNode,
+      int goodNodesSoFar,
+      int C,
+      int paths,
+      ArrayList<Integer> A,
+      boolean[] visited,
+      Map<Integer, HashSet<Integer>> edges) {
+    visited[currentNode-1] = true;
+    if (A.get(currentNode-1) == 1) {
+      goodNodesSoFar++;
+    }
+    if (goodNodesSoFar > C) {
+      return 0;
+    }
+    ArrayList<Integer> nextNodes = getNextNodes(edges, currentNode, visited);
+    if (nextNodes.isEmpty()) {
+      if (goodNodesSoFar <= C) {
+        paths++;
+      }
+      return paths;
+    }
+    int pathsFromCurrent = 0;
+    for (int i = 0; i < nextNodes.size(); i++) {
+      pathsFromCurrent += findPaths(nextNodes.get(i), goodNodesSoFar, C, paths, A, visited, edges);
+    }
+    return paths + pathsFromCurrent;
+  }
+  private ArrayList<Integer> getNextNodes(Map<Integer, HashSet<Integer>> edges, int currentNode, boolean[] visited) {
+    ArrayList<Integer> answer = new ArrayList<>();
+    HashSet<Integer> nextNodes = edges.getOrDefault(currentNode, new HashSet<>());
+    for (int i : nextNodes) {
+      if (!visited[i-1]) {
+        answer.add(i);
+      }
+    }
+    return answer;
+  }
+}
