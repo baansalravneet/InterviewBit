@@ -1,0 +1,22 @@
+public class Solution {
+    private static final int MOD = 1000007;
+    public int coinchange2(ArrayList<Integer> A, int B) {
+        int[][] dp = new int[A.size()][B+1];
+        for (int j = 0; j <= B; j++) {
+            if (j % A.get(0) == 0) {
+                dp[0][j] = 1;
+            }
+        }
+        for (int i = 1; i < A.size(); i++) {
+            for (int j = 0; j <= B; j++) {
+                if (j - A.get(i) >= 0) {
+                    dp[i][j] = dp[i-1][j] + dp[i][j-A.get(i)];
+                    dp[i][j] = dp[i][j] % MOD;
+                } else {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        return dp[A.size()-1][B];
+    }
+}
