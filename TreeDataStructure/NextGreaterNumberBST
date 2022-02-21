@@ -1,0 +1,25 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+	public TreeNode getSuccessor(TreeNode a, int b) {
+        if (a == null) {
+            return null;
+        }
+        if (a.val > b) {
+            TreeNode possibleAnswer = getSuccessor(a.left, b);
+            if (possibleAnswer == null) {
+                return a;
+            } else {
+                return possibleAnswer;
+            }
+        }
+        return getSuccessor(a.right, b);
+	}
+}
