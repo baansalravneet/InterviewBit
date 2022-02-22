@@ -1,0 +1,22 @@
+public class Solution {
+    public Long countSalutes(String A) {
+        int[] walkingLeft = new int[A.length()];
+        if (A.charAt(A.length()-1) == '<') {
+            walkingLeft[A.length()-1] = 1;
+        }
+        for (int i = A.length()-2; i >= 0; i--) {
+            if (A.charAt(i) == '<') {
+                walkingLeft[i] = walkingLeft[i+1] + 1;
+            } else {
+                walkingLeft[i] = walkingLeft[i+1];
+            }
+        }
+        long answer = 0;
+        for (int i = 0; i < A.length(); i++) {
+            if (A.charAt(i) == '>') {
+                answer += walkingLeft[i];
+            }
+        }
+        return answer;
+    }
+}
