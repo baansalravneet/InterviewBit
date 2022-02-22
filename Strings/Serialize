@@ -1,0 +1,11 @@
+public class Solution {
+    public String serialize(ArrayList<String> A) {
+        StringBuilder answer = new StringBuilder();
+        for (String i : A) {
+            answer.append(i);
+            answer.append(i.length());
+            answer.append('~');
+        }
+        return answer.toString();
+    }
+}
