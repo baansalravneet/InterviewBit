@@ -1,0 +1,33 @@
+public class Solution {
+    public int permuteStrings(String A, String B) {
+        if (B.length() == 0 || A.length() == 0) {
+            return 1;
+        }
+        if (A.length() != B.length()) {
+            return 0;
+        }
+        Map<Character, Integer> freqMapA = getFrequencyMap(A);
+        for (int i = 0; i < A.length(); i++) {
+            char c = B.charAt(i);
+            if (!freqMapA.containsKey(c)) {
+                return 0;
+            }
+            int freq = freqMapA.get(c);
+            if (freq == 1) {
+                freqMapA.remove(c);
+            } else {
+                freqMapA.put(c, freq - 1);
+            }
+        }
+        return 1;
+    }
+    private Map<Character, Integer> getFrequencyMap(String A) {
+        Map<Character, Integer> freqMap = new HashMap<>();
+        for (int i = 0; i < A.length(); i++) {
+            char c = A.charAt(i);
+            int freq = freqMap.getOrDefault(c, 0);
+            freqMap.put(c, freq+1);
+        }
+        return freqMap;
+    }
+}
