@@ -1,0 +1,13 @@
+public class Solution {
+    public ArrayList<Integer> solve(String A) {
+        Map<Character, Integer> freqMap = new LinkedHashMap<>();
+        for (int i = 0; i < A.length(); i++) {
+            char c = A.charAt(i);
+            int freq = freqMap.getOrDefault(c, 0);
+            freqMap.put(c, freq+1);
+        }
+        ArrayList<Integer> answer = new ArrayList<>();
+        freqMap.values().forEach(v -> answer.add(v));
+        return answer;
+    }
+}
