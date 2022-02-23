@@ -1,0 +1,17 @@
+public class Solution {
+    public ArrayList<String> deserialize(String A) {
+        String[] words = A.split("~");
+        ArrayList<String> answer = new ArrayList<>();
+        for (String s : words) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                    answer.add(sb.toString());
+                    break;
+                }
+                sb.append(s.charAt(i));
+            }
+        }
+        return answer;
+    }
+}
