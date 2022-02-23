@@ -1,0 +1,29 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> verticalSum(TreeNode A) {
+        Map<Integer, Integer> answer = new TreeMap<>();
+        populate(A, answer, 0);
+        ArrayList<Integer> returnThis = new ArrayList<>(answer.values());
+        return returnThis;
+    }
+    private void populate(TreeNode A, Map<Integer, Integer> answer, int i) {
+        if (A == null) {
+            return;
+        }
+        answer.put(i, A.val + answer.getOrDefault(i, 0));
+        populate(A.left, answer, i-1);
+        populate(A.right, answer, i+1);
+    }
+}
