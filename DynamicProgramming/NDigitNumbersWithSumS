@@ -1,0 +1,21 @@
+public class Solution {
+    private static final int MOD = 1000000007;
+    public int solve(int A, int B) {
+        long[][] dp = new long[A+1][B+1];
+        for (int s = 1; s <= 9 && s <= B; s++) {
+            dp[1][s] = 1;
+        }
+        for (int n = 2; n <= A; n++) {
+            for (int s = 1; s <= B; s++) {
+                dp[n][s] = dp[n-1][s];
+                for (int i = 1; i <= 9; i++) {
+                    if (s - i >= 0) {
+                        dp[n][s] += dp[n-1][s-i];
+                    }
+                    dp[n][s] %= MOD;
+                }
+            }
+        }
+        return (int)dp[A][B];
+    }
+}
