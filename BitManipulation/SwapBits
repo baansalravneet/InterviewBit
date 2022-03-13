@@ -1,0 +1,18 @@
+public class Solution {
+    public int solve(int A, int B, int C) {
+        StringBuilder sb = new StringBuilder();
+        while (A != 0) {
+            sb.append(A%2);
+            A /= 2;
+        }
+        while (sb.length() != 32) {
+            sb.append('0');
+        }
+        char b = sb.charAt(B-1);
+        char c = sb.charAt(C-1);
+        sb.setCharAt(B-1, c);
+        sb.setCharAt(C-1, b);
+        sb.reverse();
+        return Integer.parseInt(sb.toString(), 2);
+    }
+}
