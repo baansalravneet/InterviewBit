@@ -1,0 +1,19 @@
+public class Solution {
+    public ArrayList<String> specialStrings(ArrayList<String> A) {
+        ArrayList<String> answer = new ArrayList<>();
+        populateAnswer(A, answer, 0, new StringBuilder());
+        return answer;
+    }
+    private void populateAnswer(ArrayList<String> A, ArrayList<String> answer, int i, StringBuilder sb) {
+        if (i == A.size()) {
+            answer.add(sb.toString());
+            return;
+        }
+        String s = A.get(i);
+        for (int x = 0; x < s.length(); x++) {
+            sb.append(s.charAt(x));
+            populateAnswer(A, answer, i+1, sb);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+}
