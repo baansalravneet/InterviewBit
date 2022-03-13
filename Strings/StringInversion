@@ -1,0 +1,14 @@
+public class Solution {
+    public String solve(String A) {
+        StringBuilder answer = new StringBuilder();
+        for (int i = 0; i < A.length(); i++) {
+            char c = A.charAt(i);
+            if (c >= 'A' && c <= 'Z') {
+                answer.append(Character.toLowerCase(c));
+            } else {
+                answer.append(Character.toUpperCase(c));
+            }
+        }
+        return answer.toString();
+    }
+}
