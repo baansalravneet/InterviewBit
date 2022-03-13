@@ -1,0 +1,19 @@
+public class Solution {
+    public int solve(String A, int B) {
+        int maxCount = 0;
+        for (int i = 0; i < A.length(); i++) {
+            int currentCount = 0;
+            int aCount = 0;
+            while (i < A.length() && currentCount < B) {
+                if (A.charAt(i) == 'a') {
+                    aCount++;
+                }
+                currentCount++;
+                i++;
+            }
+            i--;
+            maxCount = Math.max(maxCount, aCount);
+        }
+        return maxCount;
+    }
+}
