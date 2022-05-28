@@ -1,0 +1,33 @@
+public class Solution {
+    public int solve(String A) {
+        int n = A.length();
+        boolean[][] dp = new boolean[n][n];
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = true;
+            count++;
+        }
+        int k = 1;
+        for (int i = 0; i < n && k < n; i++, k++) {
+            if (A.charAt(i) == A.charAt(k)) {
+                dp[i][k] = true;
+                count++;
+            }
+        }
+        int x = 2;
+        while (x < n) {
+            int j = x;
+            int i = 0;
+            while (j < n && i < n) {
+                if (A.charAt(i) == A.charAt(j) && dp[i+1][j-1]) {
+                    dp[i][j] = true;
+                    count++;
+                }
+                i++;
+                j++;
+            }
+            x++;
+        }
+        return count;
+    }
+}
